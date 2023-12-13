@@ -8,22 +8,19 @@ const AboutPage = () => {
         <h1 className="text-center">About Us</h1>
         <hr />
         <p className="lead text-center">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-          facere doloremque veritatis odit similique sequi. Odit amet fuga nam
-          quam quasi facilis sed doloremque saepe sint perspiciatis explicabo
-          totam vero quas provident ipsam, veritatis nostrum velit quos
-          recusandae est mollitia esse fugit dolore laudantium. Ex vel explicabo
-          earum unde eligendi autem praesentium, doloremque distinctio nesciunt
-          porro tempore quis eaque labore voluptatibus ea necessitatibus
-          exercitationem tempora molestias. Ad consequuntur veniam sequi ullam
-          tempore vel tenetur soluta dolore sunt maxime aliquam corporis est,
-          quo saepe dolorem optio minus sint nemo totam dolorum! Reprehenderit
-          delectus expedita a alias nam recusandae illo debitis repellat libero,
-          quasi explicabo molestiae saepe, dolorem tempore itaque eveniet quam
-          dignissimos blanditiis excepturi harum numquam vel nihil? Ipsum
+          Established in the year of 2015, we “Bajarangi Industries” are the
+          Manufacturer and Importer of an extensive array of Aluminium Foil Paper
+          Plate Making Machine, Manual Paper Plate Making Machine, Fully
+          Automatic Paper Plate Making Machine, Triple Die Paper Plate Making
+          Machine, Fully Automatic Non Woven Carry Bag Making Machine,
+          Disposable Paper Cup Making Machine, Agarbatti Making Machine etc.
+          We direct all our activities to cater the expectations of customers by
+          providing them excellent quality products as per their gratifications.
+          Moreover, we follow moral business policies and crystal pure transparency in
+          all our transactions to keep healthy relations with the customers.
         </p>
 
-        <h2 className="text-center py-4">Our Products</h2>
+        {/* <h2 className="text-center py-4">Our Products</h2>
         <div className="row">
           <div className="col-md-3 col-sm-6 mb-3 px-3">
             <div className="card h-100">
@@ -57,7 +54,7 @@ const AboutPage = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
       <Footer />
     </>

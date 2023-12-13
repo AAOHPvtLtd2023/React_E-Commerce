@@ -2,41 +2,108 @@ import React, { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { Link, useParams } from "react-router-dom";
 import Marquee from "react-fast-marquee";
-import { useDispatch } from "react-redux";
-import { addCart } from "../redux/action";
-
+import { db } from "../components/firebaase.js";
 import { Footer, Navbar } from "../components";
+import './product.css'
+import sanitizeHtml from 'sanitize-html';
+import icon1 from '../icon/noreturn.gif';
+import icon2 from '../icon/delivery.gif';
+import icon3 from '../icon/secure.gif';
+import icon4 from '../icon/warenty.gif';
+import Slider from 'react-touch-drag-slider'
+
 
 const Product = () => {
-  const { id } = useParams();
+  const { catId, productId } = useParams();
   const [product, setProduct] = useState([]);
   const [similarProducts, setSimilarProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [loading2, setLoading2] = useState(false);
-
-  const dispatch = useDispatch();
-
-  const addProduct = (product) => {
-    dispatch(addCart(product));
-  };
+  const [description, setDescription] = useState('');
 
   useEffect(() => {
-    const getProduct = async () => {
+    const fetchProduct = async () => {
       setLoading(true);
-      setLoading2(true);
-      const response = await fetch(`https://fakestoreapi.com/products/${id}`);
-      const data = await response.json();
-      setProduct(data);
-      setLoading(false);
-      const response2 = await fetch(
-        `https://fakestoreapi.com/products/category/${data.category}`
-      );
-      const data2 = await response2.json();
-      setSimilarProducts(data2);
-      setLoading2(false);
+      try {
+        const snapshot = await db
+          .collection('categories')
+          .doc(catId)
+          .collection('products')
+          .doc(productId)
+          .get();
+
+        const productData = snapshot.data();
+        setProduct(productData);
+        console.log(productData);
+        const sanitizedDescription = sanitizeHtml(productData.description);
+        setDescription(sanitizedDescription);
+      } catch (error) {
+        console.error('Error fetching data: ', error);
+      } finally {
+        setLoading(false); // Set loading to false after fetching data
+      }
     };
-    getProduct();
-  }, [id]);
+
+    fetchProduct();
+  }, [catId, productId]);
+
+  useEffect(() => {
+    const fetchSimilarProduct = async (cat, id) => {
+      try {
+        const snapshot = await db
+          .collection('categories')
+          .doc(cat)
+          .collection('products')
+          .doc(id)
+          .get();
+
+        const productData = snapshot.data();
+        return productData;
+      } catch (error) {
+        console.error('Error fetching product data: ', error);
+        return null;
+      }
+    };
+
+    const Similarproduct = async () => {
+      try {
+        setLoading2(true);
+        const snapshot = await db.collection('bestproduct').get();
+
+        const productsArray = await Promise.all(
+          snapshot.docs.map(async (doc) => {
+            const { category, product } = doc.data();
+            const productData = await fetchSimilarProduct(category, product);
+
+            if (productData) {
+              return {
+                id: doc.id,
+                ...productData,
+              };
+            }
+            return null;
+          })
+        );
+
+        // Filter out null values (failed fetches) and update the state
+        setSimilarProducts(productsArray.filter((product) => product !== null));
+        setLoading2(false);
+      } catch (error) {
+        console.error('Error fetching bestproduct data: ', error);
+        setLoading2(false);
+      }
+    };
+
+    Similarproduct();
+  }, []);
+
+
+
+
+  const createMarkup = () => {
+    return { __html: description };
+  };
+
 
   const Loading = () => {
     return (
@@ -67,32 +134,96 @@ const Product = () => {
         <div className="container my-5 py-2">
           <div className="row">
             <div className="col-md-6 col-sm-12 py-3">
-              <img
-                className="img-fluid"
-                src={product.image}
-                alt={product.title}
-                width="400px"
-                height="400px"
-              />
+             
+              {product.photos && product.photos.length > 0 ? (
+                <Slider
+                  activeIndex={0}
+                  threshHold={100}
+                  transition={0.5}
+                  scaleOnDrag={true}
+                >
+                  {product.photos.map((url, index) => (
+                    <img className="img-fluid" src={url} key={index} alt={product.title} />
+                  ))}
+                </Slider>
+
+              ) : (
+                <p>No media available</p>
+              )}
+
+
             </div>
+
             <div className="col-md-6 col-md-6 py-5">
-              <h4 className="text-uppercase text-muted">{product.category}</h4>
-              <h1 className="display-5">{product.title}</h1>
+              <h1 className="display-5">
+                {product.title}
+              </h1>
               <p className="lead">
-                {product.rating && product.rating.rate}{" "}
+                <i className="fa fa-star"></i>
+                <i className="fa fa-star"></i>
+                <i className="fa fa-star"></i>
                 <i className="fa fa-star"></i>
               </p>
-              <h3 className="display-6  my-4">${product.price}</h3>
-              <p className="lead">{product.description}</p>
-              <button
-                className="btn btn-outline-dark"
-                onClick={() => addProduct(product)}
-              >
-                Add to Cart
-              </button>
-              <Link to="/cart" className="btn btn-dark mx-3">
-                Go to Cart
-              </Link>
+              <div class="cards">
+                <div class="card10 red">
+                  <p class="tip">Warranty</p>
+                  <p class="second-text"><img src={icon4} style={{ height: '7vh', width: '7vw', marginLeft: '-12px' }} /></p>
+                </div>
+                <div class="card10 blue">
+                  <p class="tip">Delivery</p>
+                  <p class="second-text"><img src={icon2} style={{ height: '5vh', width: '7vw', marginLeft: '-12px' }} /></p>
+                </div>
+                <div class="card10 green">
+                  <p class="tip">Secure</p>
+                  <p class="second-text"><img src={icon3} style={{ height: '7vh', width: '7vw', marginLeft: '-15px' }} /></p>
+                </div>
+                <div class="card10 green">
+                  <p class="tip">Non Returnable</p>
+                  <p class="second-text"><img src={icon1} style={{ height: '7vh', width: '7vw', marginLeft: '-15px' }} /></p>
+                </div>
+              </div>
+
+              <div class="card2">
+                <div class="small-desc" dangerouslySetInnerHTML={createMarkup()} />
+                <div class="go-corner">
+                  <div class="go-arrow">→</div>
+                </div>
+              </div>
+
+
+              <div classname="button_area" style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
+                <Link to={"/contact"}> <button>Contact Us </button> </Link>
+                <Link to={"/enquery/" + product.title}><button> Get Quote</button></Link>
+              </div>
+            </div>
+
+            <div>
+              <div className="videoWrapper" >
+                {product.videoURL &&
+                  <div>
+                    <video className="responsiveVideo" autoPlay={true} loop={true} muted={true}>
+                      <source src={product.videoURL} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+
+
+          <div className="spec_c">
+            <div class="card1">
+              <span class="title1">Specifications</span>
+              <div class="card1__tags">
+                {product.specifications &&
+                  product.specifications.map((spec, index) => (
+                    <ul key={index} class="tag">
+                      <li class="tag1__name"><strong>{spec.name}:</strong> {spec.value}</li>
+                    </ul>
+                  ))}
+
+              </div>
             </div>
           </div>
         </div>
@@ -133,37 +264,30 @@ const Product = () => {
                 <div key={item.id} className="card mx-4 text-center">
                   <img
                     className="card-img-top p-3"
-                    src={item.image}
+                    src={item.photos[0]}
                     alt="Card"
                     height={300}
                     width={300}
                   />
                   <div className="card-body">
                     <h5 className="card-title">
-                      {item.title.substring(0, 15)}...
+                      {item.title}
                     </h5>
                   </div>
-                  {/* <ul className="list-group list-group-flush">
-                    <li className="list-group-item lead">${product.price}</li>
-                  </ul> */}
+                 
                   <div className="card-body">
                     <Link
-                      to={"/product/" + item.id}
+                      to={"/product/" +item.category+ '/'+ item.id}
                       className="btn btn-dark m-1"
                     >
                       Buy Now
                     </Link>
-                    <button
-                      className="btn btn-dark m-1"
-                      onClick={() => addProduct(item)}
-                    >
-                      Add to Cart
-                    </button>
                   </div>
                 </div>
               );
             })}
           </div>
+
         </div>
       </>
     );
@@ -175,7 +299,7 @@ const Product = () => {
         <div className="row">{loading ? <Loading /> : <ShowProduct />}</div>
         <div className="row my-5 py-5">
           <div className="d-none d-md-block">
-          <h2 className="">You may also Like</h2>
+            <h2 className="">You may also Like</h2>
             <Marquee
               pauseOnHover={true}
               pauseOnClick={true}
@@ -192,3 +316,5 @@ const Product = () => {
 };
 
 export default Product;
+
+

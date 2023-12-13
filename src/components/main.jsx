@@ -1,28 +1,25 @@
 import React from "react";
+import DemoCarousel from "./slider";
+import Smalladv from "./advertisment";
+import Bestproduct from "./BestProduct.js";
+
 
 const Home = () => {
   return (
     <>
-      <div className="hero border-1 pb-3">
-        <div className="card bg-dark text-white border-0 mx-3">
-          <img
-            className="card-img img-fluid"
-            src="./assets/main.png.jpg"
-            alt="Card"
-            height={500}
-          />
-          <div className="card-img-overlay d-flex align-items-center">
-            <div className="container">
-              <h5 className="card-title fs-1 text fw-lighter">New Season Arrivals</h5>
-              <p className="card-text fs-5 d-none d-sm-block ">
-                This is a wider card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
-              </p>
-            </div>
-          </div>
-        </div>
+      <DemoCarousel />
+      <Smalladv />
+      <h2 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', textDecoration:'underline', fontSize:'2em',fontStyle:'oblique', fontWeight:'600' }}>Our Company</h2>
+      <div style={{display:'flex', width:'100%', justifyContent:'center', alignItems:'center'}}>
+        <p style={{ display: 'flex', fontSize: '1.6em', textAlign:'justify', padding:'20px'}}> Owing to the superior quality of the product range offered, we have carved a firm foothold in the domain. The products offered
+          by us are in compliance with industrial standards and are offered at most affordable prices. The professionals appointed by us
+          invest their long working hours in manufacturing products as per clients' specifications and details to meet their exact
+          requirements.
+          We direct all our activities to cater the expectations of customers by providing them excellent quality products as per their
+          gratifications. Moreover, we follow moral business policies and crystal pure transparency in all our transactions to keep healthy
+          relations with the customers.</p>
       </div>
+      <Bestproduct />
     </>
   );
 };

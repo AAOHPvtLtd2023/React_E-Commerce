@@ -1,40 +1,103 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { addCart } from "../redux/action";
-
+import { db } from "./firebaase.js";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import "./Designs/Products.css";
 
 import { Link } from "react-router-dom";
 
 const Products = () => {
   const [data, setData] = useState([]);
-  const [filter, setFilter] = useState(data);
   const [loading, setLoading] = useState(false);
-  let componentMounted = true;
+  const [categories, setCategories] = useState([]);
 
-  const dispatch = useDispatch();
 
-  const addProduct = (product) => {
-    dispatch(addCart(product))
-  }
+
 
   useEffect(() => {
-    const getProducts = async () => {
+    const fetchCategories = async () => {
       setLoading(true);
-      const response = await fetch("https://fakestoreapi.com/products/");
-      if (componentMounted) {
-        setData(await response.clone().json());
-        setFilter(await response.json());
-        setLoading(false);
-      }
+      try {
+        const snapshot = await db.collection('categories').get();
+        const categoryData = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setCategories(categoryData);
 
-      return () => {
-        componentMounted = false;
-      };
+
+        setLoading(false); // Set loading to false after fetching data
+      } catch (error) {
+        console.error('Error fetching data: ', error);
+      }
     };
 
-    getProducts();
+    fetchCategories();
+  }, []);
+
+  const fetchProduct = async (cat) => {
+    setLoading(true);
+    try {
+      let productData = [];
+
+      if (cat === "all") {
+        // Fetch all products
+        const snapshot = await db.collectionGroup('products').get();
+        productData = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+      } else {
+        // Fetch products by category
+        const snapshot = await db.collection('categories').doc(cat).collection('products').get();
+        productData = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+      }
+
+      setData(productData);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching products: ', error);
+    }
+  };
+
+
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const snapshot = await db.collection('categories').get();
+        const categoryData = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setCategories(categoryData);
+
+        // Fetch and store products for each category
+        const productsData = {};
+        await Promise.all(
+          categoryData.map(async (category) => {
+            const productRef = db.collection('categories').doc(category.id).collection('products');
+            const productSnapshot = await productRef.get();
+            const productData = productSnapshot.docs.map((doc) => ({
+              id: doc.id,
+              ...doc.data(),
+            }));
+            productsData[category.id] = productData;
+          })
+        );
+      } catch (error) {
+        console.error('Error fetching data: ', error);
+      }
+    };
+    const fetchInitialProducts = async () => {
+      fetchProduct("all");
+    };
+
+    fetchCategories();
+    fetchInitialProducts();
   }, []);
 
   const Loading = () => {
@@ -65,72 +128,57 @@ const Products = () => {
     );
   };
 
-  const filterProduct = (cat) => {
-    const updatedList = data.filter((item) => item.category === cat);
-    setFilter(updatedList);
-  }
+
   const ShowProducts = () => {
     return (
       <>
-        <div className="buttons text-center py-5">
-          <button className="btn btn-outline-dark btn-sm m-2" onClick={() => setFilter(data)}>All</button>
-          <button className="btn btn-outline-dark btn-sm m-2" onClick={() => filterProduct("men's clothing")}>Men's Clothing</button>
-          <button className="btn btn-outline-dark btn-sm m-2" onClick={() => filterProduct("women's clothing")}>
-            Women's Clothing
-          </button>
-          <button className="btn btn-outline-dark btn-sm m-2" onClick={() => filterProduct("jewelery")}>Jewelery</button>
-          <button className="btn btn-outline-dark btn-sm m-2" onClick={() => filterProduct("electronics")}>Electronics</button>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <div className="buttons text-center py-5">
+            <button className="btn btn-outline-dark btn-sm m-2" onClick={() => fetchProduct("all")}>
+              All
+            </button>
+            {categories.map((cat) => (
+              <button key={cat} className="btn btn-outline-dark btn-sm m-2" onClick={() => fetchProduct(cat.id)}>{cat.name}</button>
+            ))}
+          </div>
+          <div style={{display:'flex', flexDirection:'row',flexWrap:'wrap', alignItems:'center', justifyContent:'center', gap:'50px'}}>
+            {data.map((product) => {
+              return (
+                <div className="proall" >
+                  <div key={product.id} >
+                    <Link to={"/product/" + product.category + "/" + product.id} >
+                      <div class="card3">
+                        <div class="card3__image">
+                          <img
+                            className="card-img-top p-3"
+                            src={product.photos[0]}
+                            alt="Card"
+                            height={300}
+                          /></div>
+                        <div class="card3__content">
+                          <span class="title3">{product.title}</span>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
-
-        {filter.map((product) => {
-          return (
-            <div id={product.id} key={product.id} className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4">
-              <div className="card text-center h-100" key={product.id}>
-                <img
-                  className="card-img-top p-3"
-                  src={product.image}
-                  alt="Card"
-                  height={300}
-                />
-                <div className="card-body">
-                  <h5 className="card-title">
-                    {product.title.substring(0, 12)}...
-                  </h5>
-                  <p className="card-text">
-                    {product.description.substring(0, 90)}...
-                  </p>
-                </div>
-                <ul className="list-group list-group-flush">
-                  <li className="list-group-item lead">$ {product.price}</li>
-                  {/* <li className="list-group-item">Dapibus ac facilisis in</li>
-                    <li className="list-group-item">Vestibulum at eros</li> */}
-                </ul>
-                <div className="card-body">
-                  <Link to={"/product/" + product.id} className="btn btn-dark m-1">
-                    Buy Now
-                  </Link>
-                  <button className="btn btn-dark m-1" onClick={() => addProduct(product)}>
-                    Add to Cart
-                  </button>
-                </div>
-              </div>
-            </div>
-
-          );
-        })}
       </>
     );
   };
   return (
     <>
-      <div className="container my-3 py-3">
-        <div className="row">
+      <div className="container my-3 py-3" >
+        <div className="row" >
           <div className="col-12">
             <h2 className="display-5 text-center">Latest Products</h2>
             <hr />
           </div>
         </div>
-        <div className="row justify-content-center">
+        <div className=" justify-content-center" >
           {loading ? <Loading /> : <ShowProducts />}
         </div>
       </div>
