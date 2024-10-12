@@ -4,7 +4,9 @@
     display: none;
     border-radius: 10px;
 }
-
+.carousel-root{
+  width: 75%;
+}
 .imageStyle {
     width: 95vw;
     height: 70vh;

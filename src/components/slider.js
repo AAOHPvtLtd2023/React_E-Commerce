@@ -54,6 +54,7 @@ const DemoCarousel = () => {
       autoPlay={true}
       interval={3000}
       infiniteLoop={true}
+      style={{width:'50%'}}
     >
 
       {images.map((image, index) => (
