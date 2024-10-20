@@ -1,5 +1,5 @@
 .category-slide {
-    width: 26%; /* Use full width on smaller screens */
+    width: 22%; /* Use full width on smaller screens */
     max-width: 400px; /* Limit max width for larger screens */
     /* margin: 2% auto;  */
     height: 500px; /* Set a fixed height */

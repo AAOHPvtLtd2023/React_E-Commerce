@@ -1,11 +1,12 @@
 import { Home, Product, Products, AboutPage, ContactPage, Login, Register, PageNotFound } from "./pages"
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Quotes from "./pages/Quotes";
+import Productdetails from "./pages/ProductDetails";
 
 function App() {
     return (
         <>
-                <Routes>
+                {/* <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/product" element={<Products />} />
                     <Route path="/product/:catId/:productId" element={<Product />} />
@@ -16,7 +17,9 @@ function App() {
                     <Route path="*" element={<PageNotFound />} />
                     <Route path="/product/*" element={<PageNotFound />} />
                     <Route path="/enquery/:productnm" element={<Quotes />} />
-                </Routes>
+                    <Route path="/Productdetails" element={Productdetails} />
+                </Routes> */}
+                <Productdetails/>
         </>
     );
 }

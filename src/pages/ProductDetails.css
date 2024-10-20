@@ -1,0 +1,17 @@
+.details-main{
+    background-color: red;
+}
+.details-main-wrap{
+    display: flex;
+    background-color: aqua;
+}
+.details-main-wrap-image{
+    height: 200px;
+    width:200px;
+    background-color: pink;
+}
+.details-main-wrap-smalldetils{
+    height:200px;
+    width:300px;
+    background-color: green;
+}
