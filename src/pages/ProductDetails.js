@@ -61,35 +61,17 @@ const Productdetails = () =>{
 
             <div className="details-main-wrap-details">
                
-                <div className="">
-                    <h3>Product Description</h3>
-                    <div>
+                <div className="details-main-descriptionescription">
+              className="main-description-heading1"       <h3 className="main-description-heading">Pr className="main-description-product"oduct Description</h3>
+      className="description-product-para"               <div>
                         <p>Product Description details-1</p>
-                    </div>
-                    <div>
+     className="main-description-product"                </div>
+      className="description-product-para"               <div>
                         <p>Product Description details-2</p>
                     </div>
                     <h3>
                         Pujankaa sha busy ki???
-                    </h3>
-                    <div>
-                        <p>
-                        Specification details
-                        </p>
-                    </div>
-                </div>
-                    <span>Additional Information</span>
-                <div>
-                    <h3>Product Description</h3>
-                    <div>
-                        <p>Product Description details-1</p>
-                    </div>
-                    <div>
-                        <p>Product Description details-2</p>
-                    </div>
-                    <h3>
-                        Pujankaa sha busy ki???
-                    </h3>
+    className="main-description-product"                 </h3>
                     <div>
                         <p>
                         Specification details
