@@ -19,4 +19,7 @@
       height: 40vh;
       border-radius: 15px;
     }
+    .carousel-root{
+      width: 100%;
+    }
   }

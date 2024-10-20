@@ -26,3 +26,10 @@
     padding-left: 5%;
     padding-right: 5%;
   }
+
+  @media (max-width:768px) {
+    .main-wrapper-inner{
+      padding-left: 0%;
+      padding-right: 0%;
+    }
+  }

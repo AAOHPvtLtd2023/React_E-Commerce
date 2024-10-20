@@ -43,6 +43,7 @@
   @media (max-width: 768px) {
     .category-slide {
       height: 250px; /* Adjust height for smaller screens */
+      display: none;
     }
   }
   
