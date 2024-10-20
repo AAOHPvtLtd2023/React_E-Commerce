@@ -144,22 +144,19 @@ const Products = () => {
           <div style={{display:'flex', flexDirection:'row',flexWrap:'wrap', alignItems:'center', justifyContent:'center', gap:'50px'}}>
             {data.map((product) => {
               return (
-                <div className="proall" >
-                  <div key={product.id} >
-                    <Link to={"/product/" + product.category + "/" + product.id} >
-                      <div class="card3">
-                        <div class="card3__image">
-                          <img
-                            className="card-img-top p-3"
-                            src={product.photos[0]}
-                            alt="Card"
-                            height={300}
-                          /></div>
-                        <div class="card3__content">
-                          <span class="title3">{product.title}</span>
-                        </div>
-                      </div>
-                    </Link>
+                <div className="product-cards">
+                  <img className="product-cards-img" src="https://templates.envytheme.com/ehay/default/assets/images/products/product-5.jpg"/>
+                  <div className="product-cards-content">
+                    <span className="cards-content-title">{product.title}</span>
+                    <div className="cards-content-price">
+                      <span className="cards-content-offerprice">offer price</span>
+                      <span className="cards-content-baseprice">
+                        base price
+                      </span>
+                    </div>
+                  </div>
+                  <div className="product-cards-buynow">
+                    buy now
                   </div>
                 </div>
               );

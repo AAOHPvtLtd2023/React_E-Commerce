@@ -119,3 +119,52 @@
   }
 
   }
+
+
+
+
+
+  .product-cards{
+    display: flex;
+    border: 1px solid dimgray;
+    padding:5px;
+    flex-direction: column;
+    border-radius: 5px;
+    width: 300px;
+    height: 400px;
+    cursor: pointer;
+  }
+  .product-cards-content{
+    display: flex;
+    flex-direction: column;
+  }
+  .cards-content-price{
+    display: none;
+  }
+  .cards-content-offerprice{
+    color: #ff6a00;
+  }
+  .cards-content-baseprice{
+    color: black;
+    text-decoration: line-through;
+  }
+  .product-cards-buynow{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ff6a00;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    height: 30px;
+  }
+
+  .cards-content-title{
+    font-size: 16px;
+    text-align: justify;
+  }
+    
+    .product-cards:hover{
+      border-color: #ff6a00;
+    }

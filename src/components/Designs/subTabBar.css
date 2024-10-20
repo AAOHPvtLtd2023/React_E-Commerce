@@ -1,0 +1,44 @@
+.subtabbar-main{
+    display: flex;
+    background-color: #ff6a00;
+    /* height: 5%; */
+    width: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.subtabbar-main-inner-wrap{
+    display: flex;
+   
+    
+}
+.subtabbar-main-inner-wrap-left{
+    color:#ff6a00;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background: white;
+    padding: 4%;
+    width: 300px;
+    font-size: 22px;
+    
+}
+.subtabbar-main-inner-wrap-right{
+    display: flex;
+    gap: 2%;
+}
+
+.subtabbar-title{
+    color:white ;
+    background-color: #ff6a00;
+    width: 100px;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.subtabbar-title:nth-child(){
+    width: fit-content;
+    cursor: default;
+}
