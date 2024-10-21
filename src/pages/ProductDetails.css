@@ -1,17 +1,117 @@
 .details-main{
-    background-color: red;
+    height: 100%;
+    width: 100vw;
 }
 .details-main-wrap{
     display: flex;
-    background-color: aqua;
+    width: 100%;
+    padding: 1%;
 }
 .details-main-wrap-image{
-    height: 200px;
-    width:200px;
+    height: 20%;
+    width:40%;
     background-color: pink;
 }
 .details-main-wrap-smalldetils{
-    height:200px;
-    width:300px;
-    background-color: green;
+    height:20%;
+    width:60%;
+    padding: 2%;
+    /* background-color: red; */
+}
+.details-main-title{
+    font-size: 22px;
+    font-weight: 700;
+}
+.details-main-price{
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+    align-items: center;
+    gap: 2%;
+}
+.main-price-offerprice{
+    color: #ff6a00;
+    font-size: 20px;
+}
+.main-price-baseprice{
+    text-decoration: line-through;
+    font-size: 18px;
+}
+.main-price-discount{
+    color: green;
+    font-size: 18px;
+
+}
+.details-main-detailsword{
+    width: 100%;
+    margin-top: 1%;
+}
+.main-detailsword-content{
+    font-size: 14px;
+    color: #9C9C9C;
+    font-weight: 500;
+}
+
+.details-main-bajarangi{
+    display: flex;
+    flex-direction: column;
+    gap: 3%;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+.details-main-content{
+    display: flex;
+    gap: 1%;
+}
+.main-content-brand{
+    font-weight: 600;
+    color: black;
+}
+.main-content-industry{
+    color: #9C9C9C;
+    font-weight: 500;
+}
+
+.details-main-quotes{
+    width: 500px;
+    background-color: #ff6a00;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.details-main-quotes:hover{
+    width: 500px;
+    background-color: white;
+    color: #ff6a00;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ff6a00;
+}
+.details-main-wrap-details{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2%;
+}
+
+.details-main-descriptionescription{
+    border: 1px solid #DDDDDD;
+    padding: 2.2%;
+    width:90%;
+    border-radius: 5px;
+    margin-top: 2%;
+}
+.main-description-heading{
+    font-size: 22px;
+    color: #ff6a00;
+    font-weight: 600;
+}
+.main-description-product{
+    font-size: 14px;
+    color: #9C9C9C;
+    font-weight: 500;
 }
