@@ -3,37 +3,19 @@ import { db } from "./firebaase.js";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import "./Designs/Products.css";
-
-import { Link } from "react-router-dom";
+import { FaAngleRight } from "react-icons/fa";
+import { CiStar } from "react-icons/ci";
+import { Link, useParams } from "react-router-dom";
+import CategoryModal from "./CategoryModal.js";
+import { Modal } from "bootstrap";
+import { Box } from "@mui/material";
 
 const Products = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
-
-
-
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      setLoading(true);
-      try {
-        const snapshot = await db.collection('categories').get();
-        const categoryData = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setCategories(categoryData);
-
-
-        setLoading(false); // Set loading to false after fetching data
-      } catch (error) {
-        console.error('Error fetching data: ', error);
-      }
-    };
-
-    fetchCategories();
-  }, []);
+  const { catID } = useParams();
+  const [open, setOpen] = useState(false);
 
   const fetchProduct = async (cat) => {
     setLoading(true);
@@ -63,42 +45,47 @@ const Products = () => {
     }
   };
 
+  const fetchCategories = async () => {
+    try {
+      const snapshot = await db.collection('categories').get();
+      const categoryData = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setCategories(categoryData);
+
+      // Fetch and store products for each category
+      const productsData = {};
+      await Promise.all(
+        categoryData.map(async (category) => {
+          const productRef = db.collection('categories').doc(category.id).collection('products');
+          const productSnapshot = await productRef.get();
+          const productData = productSnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          productsData[category.id] = productData;
+        })
+      );
+    } catch (error) {
+      console.error('Error fetching data: ', error);
+    }
+  };
+  const fetchInitialProducts = async () => {
+    fetchProduct("all");
+  };
 
 
   useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const snapshot = await db.collection('categories').get();
-        const categoryData = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setCategories(categoryData);
-
-        // Fetch and store products for each category
-        const productsData = {};
-        await Promise.all(
-          categoryData.map(async (category) => {
-            const productRef = db.collection('categories').doc(category.id).collection('products');
-            const productSnapshot = await productRef.get();
-            const productData = productSnapshot.docs.map((doc) => ({
-              id: doc.id,
-              ...doc.data(),
-            }));
-            productsData[category.id] = productData;
-          })
-        );
-      } catch (error) {
-        console.error('Error fetching data: ', error);
-      }
-    };
-    const fetchInitialProducts = async () => {
-      fetchProduct("all");
-    };
-
+    if (catID) {
+      fetchProduct(catID);
+    }
     fetchCategories();
     fetchInitialProducts();
   }, []);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const Loading = () => {
     return (
@@ -128,7 +115,6 @@ const Products = () => {
     );
   };
 
-
   const ShowProducts = () => {
     return (
       <>
@@ -143,50 +129,65 @@ const Products = () => {
           </div> */}
           <div className="categories-subtab">
             <div className="categories-subtab-tab">
-              <span>
-                Cat1
+              <FaAngleRight className="right-arrow" />
+              <span onClick={() => fetchProduct("all")}>
+                ALL
               </span>
             </div>
-            <div className="categories-subtab-tab">
-              <span>
-                Cat1
-              </span>
-            </div>
-            <div className="categories-subtab-tab">
-              <span>
-                Cat1
-              </span>
-            </div>
-            <div className="categories-subtab-tab">
-              <span>
-                Cat1
-              </span>
-            </div>
+            {categories.map((cat) => (
+              <div className="categories-subtab-tab">
+                <FaAngleRight className="right-arrow" />
+                <span onClick={() => fetchProduct(cat.id)}>
+                  {cat.name}
+                </span>
+              </div>
+            ))}
           </div>
 
-          <div style={{display:'flex', flexDirection:'row',flexWrap:'wrap', alignItems:'center', justifyContent:'center', gap:'50px'}}>
+          <div className="all-card-wrap">
             {data.map((product) => {
               return (
                 <div className="product-cards">
-                  <img className="product-cards-img" src="https://templates.envytheme.com/ehay/default/assets/images/products/product-5.jpg"/>
+                  <img className="product-cards-img" src={product.photos[0]} />
                   <div className="product-cards-content">
                     <span className="cards-content-title">{product.title}</span>
                     <div className="cards-content-price">
-                      
-        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="#ff6a00" stroke="#ff6a00" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m12.495 18.587l4.092 2.15a1.044 1.044 0 0 0 1.514-1.106l-.783-4.552a1.045 1.045 0 0 1 .303-.929l3.31-3.226a1.043 1.043 0 0 0-.575-1.785l-4.572-.657A1.044 1.044 0 0 1 15 7.907l-2.088-4.175a1.044 1.044 0 0 0-1.88 0L8.947 7.907a1.044 1.044 0 0 1-.783.575l-4.51.657a1.044 1.044 0 0 0-.584 1.785l3.309 3.226a1.044 1.044 0 0 1 .303.93l-.783 4.55a1.044 1.044 0 0 0 1.513 1.107l4.093-2.15a1.043 1.043 0 0 1 .991 0"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="#ff6a00" stroke="#ff6a00" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m12.495 18.587l4.092 2.15a1.044 1.044 0 0 0 1.514-1.106l-.783-4.552a1.045 1.045 0 0 1 .303-.929l3.31-3.226a1.043 1.043 0 0 0-.575-1.785l-4.572-.657A1.044 1.044 0 0 1 15 7.907l-2.088-4.175a1.044 1.044 0 0 0-1.88 0L8.947 7.907a1.044 1.044 0 0 1-.783.575l-4.51.657a1.044 1.044 0 0 0-.584 1.785l3.309 3.226a1.044 1.044 0 0 1 .303.93l-.783 4.55a1.044 1.044 0 0 0 1.513 1.107l4.093-2.15a1.043 1.043 0 0 1 .991 0"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="#ff6a00" stroke="#ff6a00" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m12.495 18.587l4.092 2.15a1.044 1.044 0 0 0 1.514-1.106l-.783-4.552a1.045 1.045 0 0 1 .303-.929l3.31-3.226a1.043 1.043 0 0 0-.575-1.785l-4.572-.657A1.044 1.044 0 0 1 15 7.907l-2.088-4.175a1.044 1.044 0 0 0-1.88 0L8.947 7.907a1.044 1.044 0 0 1-.783.575l-4.51.657a1.044 1.044 0 0 0-.584 1.785l3.309 3.226a1.044 1.044 0 0 1 .303.93l-.783 4.55a1.044 1.044 0 0 0 1.513 1.107l4.093-2.15a1.043 1.043 0 0 1 .991 0"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="#ff6a00" stroke="#ff6a00" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m12.495 18.587l4.092 2.15a1.044 1.044 0 0 0 1.514-1.106l-.783-4.552a1.045 1.045 0 0 1 .303-.929l3.31-3.226a1.043 1.043 0 0 0-.575-1.785l-4.572-.657A1.044 1.044 0 0 1 15 7.907l-2.088-4.175a1.044 1.044 0 0 0-1.88 0L8.947 7.907a1.044 1.044 0 0 1-.783.575l-4.51.657a1.044 1.044 0 0 0-.584 1.785l3.309 3.226a1.044 1.044 0 0 1 .303.93l-.783 4.55a1.044 1.044 0 0 0 1.513 1.107l4.093-2.15a1.043 1.043 0 0 1 .991 0"/></svg>
+                      <CiStar />
+                      <CiStar />
+                      <CiStar />
+                      <CiStar />
+                      (255 reviews)
                     </div>
                   </div>
-                  <div className="product-cards-buynow">
-                    VIEW MORE
-                  </div>
+                  <a href={`/product/${product.category}/${product.id}`}>
+                    <div className="product-cards-buynow">
+                      VIEW MORE
+                    </div>
+                  </a>
                 </div>
               );
             })}
           </div>
+
+          <div className="responsive-categories-subtab">
+            <div className="responsive-categories-subtab-button" onClick={handleOpen}>
+              <span>
+                Categories
+              </span>
+            </div>
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box>
+
+              </Box>
+            </Modal>
+          </div>
         </div>
+
       </>
     );
   };

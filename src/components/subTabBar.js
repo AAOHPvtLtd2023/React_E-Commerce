@@ -10,16 +10,16 @@ const Subtabbar= ()=>{
                 </div>
                 <div className="subtabbar-main-inner-wrap-right">
                     <div className="subtabbar-title">
-                        <a>Home</a>
+                        <a href="/">Home</a>
                     </div>
                     <div className="subtabbar-title">
-                        <a>products</a>
+                        <a href="/product">products</a>
                     </div>
                     <div className="subtabbar-title">
-                        <a>About</a>
+                        <a href="/about">About</a>
                     </div>
                     <div className="subtabbar-title">
-                        <a>Contact</a>
+                        <a href="/contact">Contact</a>
                     </div>
                     <div className="subtabbar-title">
                         <a>Free shipping on all orders</a>

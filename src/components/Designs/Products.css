@@ -126,20 +126,23 @@
 
   .product-cards{
     display: flex;
-    border: 1px solid dimgray;
+    border: 1px solid #DDDDDD;
     padding:5px;
     flex-direction: column;
     border-radius: 5px;
     width: 300px;
-    height: 400px;
+    height: fit-content;
     cursor: pointer;
   }
   .product-cards-content{
     display: flex;
     flex-direction: column;
+    padding: 2%;
   }
   .cards-content-price{
-    display: none;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
   }
   .cards-content-offerprice{
     color: #ff6a00;
@@ -163,7 +166,7 @@
 
   .cards-content-title{
     font-size: 14px;
-    text-align: justify;
+    /* text-align: justify; */
   }
     
     .product-cards:hover{
@@ -177,14 +180,14 @@
 
     .categories-subtab{
       display: flex;
-      border: 1px solid dimgray;
+      border: 1px solid #DDDDDD;
       height: 500px;
       width: 400px;
       flex-direction: column;
       overflow-y: scroll;
       /* justify-content: center; */
       /* align-items: center; */
-      border-radius: 5px;
+      border-radius: 0px;
       scrollbar-width: none;
     }
 
@@ -193,21 +196,97 @@
       display: flex;
       /* justify-content: center; */
       align-items: center;
-      border-bottom: 1px solid dimgray;
+      border-bottom: 1px solid #DDDDDD;
       cursor: pointer;
       width: 100%;
     }
     .categories-subtab-tab span{
       color: #000;
       font-weight: 700;
+      margin-left: 2%;
     }
-    .categories-subtab-tab:hover span{
+    .right-arrow{
+      color: #000;
+    }
+    .categories-subtab-tab:hover span {
       color: #ff6a00;
     }
+    .categories-subtab-tab:hover .right-arrow {
+      color: #ff6a00;
+    }
+
+    .categories-subtab-tab:active span{
+      color: #ff6a00;
+    }
+
+    .categories-subtab-tab:active .right-arrow {
+      color: #ff6a00;
+    }
+
+    
+    .all-card-wrap{
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+    }
+    
+    .responsive-categories-subtab{
+      height: 100%;
+      width: 100%;
+      display: none;
+    }
+    .responsive-categories-subtab-button{
+     position: fixed;
+     bottom: 30px;
+     right: 30px;
+     height: 50px;
+     width: fit-content;
+     background-color: #ff6a00;
+     display: none;
+     justify-content: center;
+     align-items: center;
+     padding: 2%;
+     border-radius: 5px;
+    }
+    .responsive-categories-subtab-button span{
+      color: white;
+      font-weight: 600;
+    }
+
 
     @media (max-width:768px) {
       .categories-subtab{
         display: none;
       }
+      .all-card-wrap{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+      }
+      .responsive-categories-subtab{
+        height: 100%;
+        width: 100%;
+        display: flex;
+        /* position: absolute; */
+      }
+      .responsive-categories-subtab-button{
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        height: 50px;
+        width: fit-content;
+        background-color: #ff6a00;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2%;
+        border-radius: 5px;
+       }
       
     }

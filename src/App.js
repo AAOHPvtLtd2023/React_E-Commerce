@@ -6,10 +6,11 @@ import Productdetails from "./pages/ProductDetails";
 function App() {
     return (
         <>
-                {/* <Routes>
+                <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/product" element={<Products />} />
-                    <Route path="/product/:catId/:productId" element={<Product />} />
+                    <Route path="/product/:catID" element={<Products />} />
+                    <Route path="/product/:catId/:productId" element={<Productdetails />} />
                     <Route path="/about" element={<AboutPage />} />
                     <Route path="/contact" element={<ContactPage />} />
                     <Route path="/login" element={<Login />} />
@@ -18,8 +19,8 @@ function App() {
                     <Route path="/product/*" element={<PageNotFound />} />
                     <Route path="/enquery/:productnm" element={<Quotes />} />
                     <Route path="/Productdetails" element={Productdetails} />
-                </Routes> */}
-                <Productdetails/>
+                </Routes>
+                
         </>
     );
 }

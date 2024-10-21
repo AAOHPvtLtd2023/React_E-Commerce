@@ -1,78 +1,151 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./ProductDetails.css";
 import ProductCard from "../components/ProductSlider";
+import ProductCarousel from "../components/ProductCarsoual";
+import { Rating } from "@mui/material";
+import { db } from "../components/firebaase.js";
+import { Link, useParams } from "react-router-dom";
+import sanitizeHtml from 'sanitize-html';
 
 const Productdetails = () => {
+    const [ratings, setRatings] = useState(null);
+    const [reviews, setReviews] = useState(null);
+    const { catId, productId } = useParams();
+    const [product, setProduct] = useState([]);
+    const [similarProducts, setSimilarProducts] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [loading2, setLoading2] = useState(false);
+    const [description, setDescription] = useState('');
+
+    useEffect(() => {
+        const generateRandomStar = () => {
+            const min = 3;
+            const max = 5;
+            const random = Math.random() * (max - min) + min;
+            setRatings(random.toFixed(3)); // limiting to 3 decimal places
+        };
+        const generateRandomReview = () => {
+            const random = Math.floor(Math.random() * (500 - 100 + 1)) + 400; // Only 4 or 5
+            setReviews(random); // limiting to 3 decimal places
+        };
+
+        const fetchProduct = async () => {
+            setLoading(true);
+            try {
+                const snapshot = await db
+                    .collection('categories')
+                    .doc(catId)
+                    .collection('products')
+                    .doc(productId)
+                    .get();
+
+                const productData = snapshot.data();
+                setProduct(productData);
+                console.log(productData);
+                const sanitizedDescription = sanitizeHtml(productData.description);
+                setDescription(sanitizedDescription);
+            } catch (error) {
+                console.error('Error fetching data: ', error);
+            } finally {
+                setLoading(false); // Set loading to false after fetching data
+            }
+        };
+
+        fetchProduct();
+        generateRandomStar();
+        generateRandomReview();
+
+
+    }, [catId, productId])
+
     return (
         <div className="details-main">
             <div className="details-main-wrap">
                 <div className="details-main-wrap-image">
-                    image slider
+                    {product.photos && product.photos.length > 0 ? (
+                        <ProductCarousel productImages={product.photos} />
+                    ) : (
+                        <p>No media available</p>
+                    )}
                 </div>
-                <div className="details-main-wrap-smalldetils">
-                    <span className="details-main-title">details title</span>
-                    <div className="details-main-reviews">
-                        <span className="main-reviews-content">4 reviews</span>
-                    </div>
-                    <div className="details-main-price">
-                        <span className="main-price-offerprice">₹14999</span>
-                        <span className="main-price-baseprice">₹21999</span>
-                        <span className="main-price-discount">(22% 0ff)</span>
-                    </div>
-                    <div className="details-main-detailsword">
-                        <p className="main-detailsword-content">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tempus bibendum laoreet. Pellentesque ullamcorper hendrerit ornare. Nulla et metus sit amet urna dignissim viverra et vitae elit. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque ut aliquet massa. Aenean vitae suscipit tellus. Maecenas pharetra ultricies nunc, id sodales nibh pharetra eu. Nullam eu metus non dui rhoncus placerat. Vestibulum eu blandit nunc, a mollis nunc. Mauris hendrerit arcu ut leo feugiat, vitae tincidunt tortor viverra.
-                        </p>
+                {product &&
+                    <div className="details-main-wrap-smalldetils">
+                        <span className="details-main-title">{product.title}</span>
+                        <div className="details-main-reviews">
+                            <Rating name="read-only" value={ratings} readOnly color="#ff6a00" />
+                            <span className="main-reviews-content">{reviews} reviews</span>
+                        </div>
+                        <div className="details-main-price">
+                            <span className="main-price-offerprice">₹{product.price}</span>
+                            <span className="main-price-baseprice">₹{product.price + 20000}</span>
+                            <span className="main-price-discount">(22% 0ff)</span>
+                        </div>
+                        <div className="details-main-detailsword">
+                            <p className="main-detailsword-content" dangerouslySetInnerHTML={{ __html: product.description }}>
+                            </p>
+
+                        </div>
+                        <div className="details-main-bajarangi">
+                            <div className="details-main-content">
+                                <span className="main-content-brand">
+                                    Brand:
+                                </span>
+                                <span className="main-content-industry">
+                                    Bajarangi Industries
+                                </span>
+                            </div>
+                            <div className="details-main-content">
+                                <span className="main-content-brand">
+                                    Type:
+                                </span>
+                                <span className="main-content-industry">
+                                    Paper plate making
+                                </span>
+                            </div>
+                            <div className="details-main-content">
+                                <span className="main-content-brand">
+                                    Control System:
+                                </span>
+                                <span className="main-content-industry">
+                                    PLC Control
+                                </span>
+                            </div>
+                            <div className="details-main-content">
+                                <span className="main-content-brand">
+                                    Power:
+                                </span>
+                                <span className="main-content-industry">
+                                    3HP
+                                </span>
+                            </div>
+                            <div className="details-main-content">
+                                <span className="main-content-brand">
+                                    Machine material:
+                                </span>
+                                <span className="main-content-industry">
+                                    Mild steel
+                                </span>
+                            </div>
+                        </div>
+                        <div className="details-main-buttons">
+
+                            <div className="details-main-quotes">
+                                <span className="main-quotes-content">
+                                    Get Quotes
+                                </span>
+                            </div>
+                            <div className="details-main-quotes">
+                                <a href="tel:977062436">
+                                    <span className="main-quotes-content">
+                                        Call Now
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+
 
                     </div>
-                    <div className="details-main-bajarangi">
-                        <div className="details-main-content">
-                            <span className="main-content-brand">
-                                Brand:
-                            </span>
-                            <span className="main-content-industry">
-                                Bajarangi Industries
-                            </span>
-                        </div>
-                        <div className="details-main-content">
-                            <span className="main-content-brand">
-                                Type:
-                            </span>
-                            <span className="main-content-industry">
-                                Paper plate making
-                            </span>
-                        </div>
-                        <div className="details-main-content">
-                            <span className="main-content-brand">
-                                Control System:
-                            </span>
-                            <span className="main-content-industry">
-                                PLC Control
-                            </span>
-                        </div>
-                        <div className="details-main-content">
-                            <span className="main-content-brand">
-                                Power:
-                            </span>
-                            <span className="main-content-industry">
-                                3HP
-                            </span>
-                        </div>
-                        <div className="details-main-content">
-                            <span className="main-content-brand">
-                                Machine material:
-                            </span>
-                            <span className="main-content-industry">
-                            Mild steel
-                            </span>
-                        </div>
-                    </div>
-                    <div className="details-main-quotes">
-                        <span className="main-quotes-content">
-                            Get Quotes
-                        </span>
-                    </div>
-                </div>
+                }
             </div>
 
             <div className="details-main-wrap-details">
@@ -84,19 +157,36 @@ const Productdetails = () => {
                     </div>
                     <div className="main-description-product">
                         <p classNam="description-product-para">Sed nisl justo, mollis quis accumsan ut, dictum vel turpis. Sed sit amet volutpat turpis. Nam mattis, risus vel auctor venenatis, eros lacus fermentum nisl, at ultrices felis elit sed odio. In nec eros ac leo malesuada commodo in quis elit. Vivamus vehicula arcu id lorem elementum lacinia. Sed pharetra, eros ac eleifend placerat, massa nisi venenatis quam, eget maximus leo nunc in justo. Nam orci neque, pretium id rutrum venenatis, convallis a ante. Pellentesque ante metus, consequat sit amet massa vitae, condimentum vehicula ex. Vivamus congue ut enim ut malesuada. Morbi auctor nisl eu posuere sodales.
-                        Sed nisl justo, mollis quis accumsan ut, dictum vel turpis. Sed sit amet volutpat turpis. Nam mattis, risus vel auctor venenatis, eros lacus fermentum nisl, at ultrices felis elit sed odio. In nec eros ac leo malesuada commodo in quis elit. Vivamus vehicula arcu id lorem elementum lacinia. Sed pharetra, eros ac eleifend placerat, massa nisi venenatis quam, eget maximus leo nunc in justo. Nam orci neque, pretium id rutrum venenatis, convallis a ante. Pellentesque ante metus, consequat sit amet massa vitae, condimentum vehicula ex. Vivamus congue ut enim ut malesuada. Morbi auctor nisl eu posuere sodales.
+                            Sed nisl justo, mollis quis accumsan ut, dictum vel turpis. Sed sit amet volutpat turpis. Nam mattis, risus vel auctor venenatis, eros lacus fermentum nisl, at ultrices felis elit sed odio. In nec eros ac leo malesuada commodo in quis elit. Vivamus vehicula arcu id lorem elementum lacinia. Sed pharetra, eros ac eleifend placerat, massa nisi venenatis quam, eget maximus leo nunc in justo. Nam orci neque, pretium id rutrum venenatis, convallis a ante. Pellentesque ante metus, consequat sit amet massa vitae, condimentum vehicula ex. Vivamus congue ut enim ut malesuada. Morbi auctor nisl eu posuere sodales.
 
 
 
-</p>
+                        </p>
                     </div>
                     <h3 className="main-description-heading">
-                        Pujankaa sha busy ki???
+                        Specification
                     </h3>
                     <div className="main-description-product">
-                        <p>
-                            Specification details
+                        <p classNam="description-product-para-spec">
+                            Brand:
+                            Bajarangi Industries
                         </p>
+                        <p classNam="description-product-para-spec">
+                            Type:
+                            Paper plate making
+                        </p>
+                        <p classNam="description-product-para-spec">
+                            Power:
+                            3HP
+                        </p>
+                        <p classNam="description-product-para-spec">
+                            Machine material:
+                            Mild steel
+                        </p>
+
+
+
+
                     </div>
                 </div>
             </div>

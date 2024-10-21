@@ -1,42 +1,16 @@
 import React from "react";
 import '../components/Designs/CategorySlide.css';
 
-const categories = [
-  "Power Tools",
-  "Hand Tools",
-  "Gardening Equipment",
-  "Electrical Tools",
-  "Safety Gear",
-  "Power Tools",
-  "Hand Tools",
-  "Gardening Equipment",
-  "Electrical Tools",
-  "Safety Gear",
-  "Power Tools",
-  "Hand Tools",
-  "Gardening Equipment",
-  "Electrical Tools",
-  "Safety Gear",
-  "Power Tools",
-  "Hand Tools",
-  "Gardening Equipment",
-  "Electrical Tools",
-  "Safety Gear",
-  "Power Tools",
-  "Hand Tools",
-  "Gardening Equipment",
-  "Electrical Tools",
-  "Safety Gear",
-];
 
-const CategorySlide = () => {
+const CategorySlide = ({ categories }) => {
   return (
     <div className="category-slide">
-      
       <div>
-        {categories.map((category, index) => (
+        {categories.map((category) => (
           <div className="category-slide__item">
-            <span>{category}</span>
+            <a href={`/product/${category.id}`}>
+              <span>{category.name}</span>
+            </a>
           </div>
         ))}
       </div>

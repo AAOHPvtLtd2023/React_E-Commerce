@@ -13,7 +13,7 @@
   .product-card {
     flex: 0 0 auto; /* Prevent flex items from growing or shrinking */
     width: 350px; /* Base width for larger screens */
-    height: 370px; /* Fixed height for cards */
+    height: fit-content; /* Fixed height for cards */
     margin-right: 16px; /* Space between cards */
     display: flex; /* Use flexbox for internal layout */
     flex-direction: column; /* Align children vertically */

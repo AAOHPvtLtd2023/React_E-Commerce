@@ -9,7 +9,7 @@
   flex-direction: column;
   justify-content: space-between; /* Space out the content */
   width: 350px; /* Fixed width */
-  height: 500px; /* Fixed height */
+  height: 400px; /* Fixed height */
   margin-right: 16px; /* Space between cards */
   transition: all ease .5s;
   cursor: pointer;
@@ -33,9 +33,10 @@
 }
 
 .product-title {
-  font-size: 20px;
+  font-size: 16px;
   margin: 8px 0;
   color: black;
+  margin-bottom: 0;
 }
 
 .product-price {
@@ -52,6 +53,7 @@
   color: white;
   border-radius: 5px;
   cursor: pointer;
+  margin-top: 2.5%;
 }
 
 

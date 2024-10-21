@@ -1,3 +1,7 @@
+a{
+  text-decoration: none;
+}
+
 .category-slide {
     width: 22%; /* Use full width on smaller screens */
     max-width: 400px; /* Limit max width for larger screens */
@@ -37,6 +41,7 @@
   .category-slide__item span:hover {
     cursor: pointer;
     color: #ff6a00;
+    text-decoration: none;
   }
   
   /* Media queries for responsiveness */

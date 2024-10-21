@@ -1,0 +1,20 @@
+@media (min-width:768px) {
+    .navbar-brand {
+        font-size: large;
+        color: #ff6a00;
+    }
+    .collapse{
+       visibility: hidden;
+    }
+    .navbar-toggler{
+        visibility: hidden;
+    }
+}
+@media (max-width:768px) {
+    .collapse{
+        visibility: visible;
+    }
+    .navbar-toggler{
+        visibility: visible;
+    }
+}
