@@ -169,7 +169,7 @@ const Products = () => {
             })}
           </div>
 
-          <div className="responsive-categories-subtab">
+          {/* <div className="responsive-categories-subtab">
             <div className="responsive-categories-subtab-button" onClick={handleOpen}>
               <span>
                 Categories
@@ -185,7 +185,7 @@ const Products = () => {
 
               </Box>
             </Modal>
-          </div>
+          </div> */}
         </div>
 
       </>
