@@ -3,7 +3,7 @@ import { Footer, Navbar } from "../components";
 import emailjs from '@emailjs/browser';
 import parsePhoneNumber from 'libphonenumber-js';
 import firebase from 'firebase/compat/app';
-
+import './ContactPage.css';
 
 const ContactPage = () => {
   const form = useRef();
@@ -68,7 +68,7 @@ const ContactPage = () => {
   return (
     <>
       {/* <Navbar /> */}
-      <div className="container my-3 py-3">
+      <div className="container my-3 py-3 ">
         <h1 className="text-center">Contact Us</h1>
         <hr />
         <div class="row my-4 h-100">
@@ -149,6 +149,13 @@ const ContactPage = () => {
               </div>
             </form>
           </div>
+        </div>
+        <div className="Admin-contact">
+          <span>Biswajit</span>
+          <p>
+            Plot No 502/1237, Ogalapada, Janla Industrial Estate, Bhubaneswar, Odisha, 752054, India
+          </p>
+          <strong>8328977393</strong>
         </div>
       </div>
       <Footer />

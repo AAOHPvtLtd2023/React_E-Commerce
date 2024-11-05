@@ -1,42 +1,23 @@
-.comment-box {
+.comments-container {
+  display: flex;
+  flex-wrap: nowrap; /* Prevent wrapping */
+  gap: 20px;
+  padding: 20px;
+  justify-content: flex-start;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  overflow-y: hidden; /* Disable vertical scrolling */
   /* border: 1px solid #ddd; */
-  border-radius: 8px;
-  padding: 16px;
-  max-width: 100%; /* Increased max-width */
-  background-color: #fff;
-  overflow-x: auto; /* Enable horizontal scrolling */
-  white-space: nowrap; /* Prevent line breaks */
-  align-self: center;
-  margin: 3%;
-  scrollbar-width: none;
-}
-
-
-.comment-list {
-  display: inline-flex; /* Use inline-flex to align cards in a row */
-  overflow-x: auto; /* Enable horizontal scrolling */
-  white-space: nowrap; /* Prevent line breaks for card layout */
-  scroll-behavior: smooth; /* Smooth scrolling behavior */
 }
 
 .comment-card {
-  padding: 20px; /* Increased padding */
-  border: 1px solid #eee;
-  border-radius: 12px; /* Slightly rounder corners */
-  margin-right: 15px; /* Space between cards */
-  background-color: #f9f9f9; /* Light background for each card */
-  transition: box-shadow 0.2s;
-  font-size: 1.2em; /* Increased font size for better readability */
-  line-height: 1.5; /* Improved line height for readability */
-  min-width: 200px; /* Set a minimum width for cards */
+  min-width: 300px; /* Set a fixed or min-width for each card */
   height: 150px;
-  text-align: justify;
-  word-wrap: break-word;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  overflow: hidden;
   display: flex;
-  justify-content: center;
   align-items: center;
-}
-
-.comment-card:hover {
-  box-shadow: 0 4px 10px rgba(255, 106, 0,0.1); /* Stronger shadow effect on hover */
+  justify-content: center;
+  text-align: justify;
 }

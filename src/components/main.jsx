@@ -9,6 +9,7 @@ import ProductCard from "./ProductSlider.jsx";
 import "../components/Designs/main.css";
 import CommentBox from "./CommentBox.jsx";
 import Subtabbar from "./subTabBar.js";
+import ProductGallery from "./ProductGallery.js";
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -73,6 +74,7 @@ const Home = () => {
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
+        <ProductGallery />
         <div>
           <h2>Comment Section</h2>
           <CommentBox />

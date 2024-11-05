@@ -290,3 +290,9 @@
        }
       
     }
+
+
+    .MuiBackdrop-root{
+      opacity: 0;
+      display: none;
+    }

@@ -6,10 +6,8 @@ import "./Designs/Products.css";
 import { FaAngleRight } from "react-icons/fa";
 import { CiStar } from "react-icons/ci";
 import { Link, useParams } from "react-router-dom";
-import CategoryModal from "./CategoryModal.js";
-import { Modal } from "bootstrap";
-import { Box } from "@mui/material";
-
+import { Box, Modal } from "@mui/material";
+import { IoIosArrowUp } from "react-icons/io";
 const Products = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -169,10 +167,10 @@ const Products = () => {
             })}
           </div>
 
-          {/* <div className="responsive-categories-subtab">
+          <div className="responsive-categories-subtab">
             <div className="responsive-categories-subtab-button" onClick={handleOpen}>
               <span>
-                Categories
+                <IoIosArrowUp size={30}/>
               </span>
             </div>
             <Modal
@@ -180,12 +178,43 @@ const Products = () => {
               onClose={handleClose}
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
-            >
-              <Box>
 
+            >
+              <Box sx={{
+                width: '80%', 
+                height: '90%', 
+                maxWidth: '90%', 
+                maxHeight: '90%',
+                bgcolor: 'background.paper',
+                boxShadow: 24,
+                p: 4,
+                borderRadius: 2,
+                mx: 'auto',
+                my: '20%', // Centers the Box vertically with some margin
+              }}>
+                <div className="categories-subtab-responsive">
+                  <div className="categories-subtab-tab">
+                    <FaAngleRight className="right-arrow" />
+                    <span onClick={() => {fetchProduct("all")
+                      setOpen(false)
+                    }}>
+                      ALL
+                    </span>
+                  </div>
+                  {categories.map((cat) => (
+                    <div className="categories-subtab-tab">
+                      <FaAngleRight className="right-arrow" />
+                      <span onClick={() => {fetchProduct(cat.id)
+                        setOpen(false);
+                      }}>
+                        {cat.name}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </Box>
             </Modal>
-          </div> */}
+          </div>
         </div>
 
       </>
@@ -196,7 +225,7 @@ const Products = () => {
       <div className="container my-3 py-3" >
         <div className="row" >
           <div className="col-12">
-            <h2 className="display-5 text-center">Latest Products</h2>
+            <h2 className="display-5 text-center"> Products</h2>
             <hr />
           </div>
         </div>

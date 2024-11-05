@@ -2,6 +2,7 @@ import { Home, Product, Products, AboutPage, ContactPage, Login, Register, PageN
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Quotes from "./pages/Quotes";
 import Productdetails from "./pages/ProductDetails";
+import ProductGallery from "./components/ProductGallery";
 
 function App() {
     return (
@@ -19,8 +20,7 @@ function App() {
                     <Route path="/product/*" element={<PageNotFound />} />
                     <Route path="/enquery/:productnm" element={<Quotes />} />
                     <Route path="/Productdetails" element={Productdetails} />
-                </Routes>
-                
+                </Routes>                
         </>
     );
 }
