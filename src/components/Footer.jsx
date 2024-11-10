@@ -21,11 +21,8 @@ const Footer = () => {
           <div className="logo"></div>
           <div class="row">
             <div class="footer-col1"
-            // style={{ fontSize: '32px', color: 'red', justifyContent: 'center', display: 'flex', alignItems: 'center', paddingRight:'50px' }}
             >
              
-
-              Bajrangi Industries
             </div>
             <div class="footer-col">
               <h4>company</h4>

@@ -158,37 +158,25 @@ const Productdetails = () => {
                     <div className="main-description-product">
                         <p classNam="description-product-para">Sed nisl justo, mollis quis accumsan ut, dictum vel turpis. Sed sit amet volutpat turpis. Nam mattis, risus vel auctor venenatis, eros lacus fermentum nisl, at ultrices felis elit sed odio. In nec eros ac leo malesuada commodo in quis elit. Vivamus vehicula arcu id lorem elementum lacinia. Sed pharetra, eros ac eleifend placerat, massa nisi venenatis quam, eget maximus leo nunc in justo. Nam orci neque, pretium id rutrum venenatis, convallis a ante. Pellentesque ante metus, consequat sit amet massa vitae, condimentum vehicula ex. Vivamus congue ut enim ut malesuada. Morbi auctor nisl eu posuere sodales.
                             Sed nisl justo, mollis quis accumsan ut, dictum vel turpis. Sed sit amet volutpat turpis. Nam mattis, risus vel auctor venenatis, eros lacus fermentum nisl, at ultrices felis elit sed odio. In nec eros ac leo malesuada commodo in quis elit. Vivamus vehicula arcu id lorem elementum lacinia. Sed pharetra, eros ac eleifend placerat, massa nisi venenatis quam, eget maximus leo nunc in justo. Nam orci neque, pretium id rutrum venenatis, convallis a ante. Pellentesque ante metus, consequat sit amet massa vitae, condimentum vehicula ex. Vivamus congue ut enim ut malesuada. Morbi auctor nisl eu posuere sodales.
-
-
-
                         </p>
                     </div>
                     <h3 className="main-description-heading">
                         Specification
                     </h3>
                     <div className="main-description-product">
-                        <p classNam="description-product-para-spec">
-                            Brand:
-                            Bajarangi Industries
-                        </p>
-                        <p classNam="description-product-para-spec">
-                            Type:
-                            Paper plate making
-                        </p>
-                        <p classNam="description-product-para-spec">
-                            Power:
-                            3HP
-                        </p>
-                        <p classNam="description-product-para-spec">
-                            Machine material:
-                            Mild steel
-                        </p>
-
-
-
+                        {product.specifications && product.specifications.map((p) => (
+                            <p classNam="description-product-para-spec">
+                                {p.name}:
+                                {p.value}
+                            </p>
+                        ))}
 
                     </div>
                 </div>
+            </div>
+
+            <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '3%' }}>
+                <iframe width="868" height="488" src="https://www.youtube.com/embed/m9s1NQG3TNY" title="MR BEAST PARODY 🤑 Ft. INDIAN CREATORS | CARRYMINATI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style={{ borderRadius: 5 }}></iframe>
             </div>
 
             <div className="details-main-oth-product">

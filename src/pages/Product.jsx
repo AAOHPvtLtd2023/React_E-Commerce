@@ -134,7 +134,7 @@ const Product = () => {
         <div className="container my-5 py-2">
           <div className="row">
             <div className="col-md-6 col-sm-12 py-3">
-             
+
               {product.photos && product.photos.length > 0 ? (
                 <Slider
                   activeIndex={0}
@@ -226,6 +226,7 @@ const Product = () => {
               </div>
             </div>
           </div>
+
         </div>
       </>
     );
@@ -274,10 +275,10 @@ const Product = () => {
                       {item.title}
                     </h5>
                   </div>
-                 
+
                   <div className="card-body">
                     <Link
-                      to={"/product/" +item.category+ '/'+ item.id}
+                      to={"/product/" + item.category + '/' + item.id}
                       className="btn btn-dark m-1"
                     >
                       Buy Now
