@@ -26,6 +26,31 @@
     padding-left: 5%;
     padding-right: 5%;
   }
+  .featured-product-main{
+    margin-top: 3%;
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #ff6a00;
+  }
+  
+  .comment-area-main{
+    /* background-color: aqua; */
+    margin-top: 3%;
+    
+  }
+  .comment-area-main strong{
+    font-size: 1.5em;
+    color: #ff6a00;
+  }
+  
+  .photo-gallery-main{
+    margin-top: 3%;
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #ff6a00;
+    margin-bottom: 0.5%;
+
+      }
 
   @media (max-width:768px) {
     .main-wrapper-inner{
