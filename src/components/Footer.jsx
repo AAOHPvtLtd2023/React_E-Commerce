@@ -37,10 +37,9 @@ const Footer = () => {
             <div class="footer-col">
               <h4>Our Product</h4>
               <ul>
-                <li><a href="#">Machine 1</a></li>
-                <li><a href="#">Machine 2</a></li>
-                <li><a href="#">Machine 3</a></li>
-                <li><a href="#">Machine 4</a></li>
+                <li><a href="#">Paper Plate Making Machine</a></li>
+                <li><a href="#">Automatic Paper Cup Making Machine</a></li>
+                <li><a href="#">Non Woven Bag Making Machine</a></li>
               </ul>
             </div>
             <div class="footer-col">
