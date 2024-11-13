@@ -21,9 +21,9 @@ const Subtabbar= ()=>{
                     <div className="subtabbar-title">
                         <a href="/contact">Contact</a>
                     </div>
-                    <div className="subtabbar-title">
+                    {/* <div className="subtabbar-title">
                         <a>Free shipping on all orders</a>
-                    </div>
+                    </div> */}
                 </div>
             </div>
 

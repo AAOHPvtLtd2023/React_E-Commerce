@@ -22,7 +22,7 @@ const Home = () => {
       let productData = [];
 
       // Fetch all products
-      const snapshot = await db.collectionGroup('products').get();
+      const snapshot = await db.collectionGroup("products").get();
       productData = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
@@ -31,14 +31,14 @@ const Home = () => {
       setData(productData);
       setLoading(false);
     } catch (error) {
-      console.error('Error fetching products: ', error);
+      console.error("Error fetching products: ", error);
     }
   };
 
   const fetchCategories = async () => {
     setLoading(true);
     try {
-      const snapshot = await db.collection('categories').get();
+      const snapshot = await db.collection("categories").get();
       const categoryData = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
@@ -46,10 +46,9 @@ const Home = () => {
       console.log(categoryData);
       setCategories(categoryData);
 
-
       setLoading(false); // Set loading to false after fetching data
     } catch (error) {
-      console.error('Error fetching data: ', error);
+      console.error("Error fetching data: ", error);
     }
   };
 
@@ -62,21 +61,21 @@ const Home = () => {
     <div className="main-wrapper">
       <Subtabbar />
       <div className="main-wrapper-inner">
-        <div style={{ display: 'flex' }}>
-          {categories &&
-            <CategorySlide categories={categories} />
-          }
+        <div style={{ display: "flex" }}>
+          {categories && <CategorySlide categories={categories} />}
           <DemoCarousel />
         </div>
         <Smalladv />
+        <div className="featured-product-main">Featured Products</div>
         <div className="product-list">
-          {data.map(product => (
+          {data.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
+        <div className="photo-gallery-main">Exhibit</div>
         <ProductGallery />
-        <div>
-          <h2>Comment Section</h2>
+        <div className="comment-area-main">
+          <strong>Comment Section</strong>
           <CommentBox />
         </div>
       </div>
