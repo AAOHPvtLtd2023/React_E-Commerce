@@ -58,6 +58,17 @@ const Productdetails = () => {
 
     }, [catId, productId])
 
+    const trimDescription = (description) => {
+        // Split the description into words
+        const words = description.split(' ');
+
+        // Take the first 60 words and join them back into a string
+        const trimmedDescription = words.slice(0, 60).join(' ');
+
+        // If the description is longer than 60 words, append '...'
+        return trimmedDescription.length < description.length ? trimmedDescription + '...' : trimmedDescription;
+    };
+
     return (
         <div className="details-main">
             <div className="details-main-wrap">
@@ -81,9 +92,11 @@ const Productdetails = () => {
                             <span className="main-price-discount">(Offer applied)</span>
                         </div>
                         <div className="details-main-detailsword">
-                            <p className="main-detailsword-content" dangerouslySetInnerHTML={{ __html: product.description }}>
-                            </p>
-
+                            {product.description &&
+                                <p className="main-detailsword-content"
+                                    dangerouslySetInnerHTML={{ __html: trimDescription(product.description) }}>
+                                </p>
+                            }
                         </div>
                         <div className="details-main-bajarangi">
                             <div className="details-main-content">
@@ -94,38 +107,17 @@ const Productdetails = () => {
                                     Bajarangi Industries
                                 </span>
                             </div>
-                            <div className="details-main-content">
-                                <span className="main-content-brand">
-                                    Type:
-                                </span>
-                                <span className="main-content-industry">
-                                    Paper plate making
-                                </span>
-                            </div>
-                            <div className="details-main-content">
-                                <span className="main-content-brand">
-                                    Control System:
-                                </span>
-                                <span className="main-content-industry">
-                                    PLC Control
-                                </span>
-                            </div>
-                            <div className="details-main-content">
-                                <span className="main-content-brand">
-                                    Power:
-                                </span>
-                                <span className="main-content-industry">
-                                    3HP
-                                </span>
-                            </div>
-                            <div className="details-main-content">
-                                <span className="main-content-brand">
-                                    Machine material:
-                                </span>
-                                <span className="main-content-industry">
-                                    Mild steel
-                                </span>
-                            </div>
+
+                            {product.specifications && product.specifications.slice(0, 4).map((p) => (
+                                <div className="details-main-content">
+                                    <span className="main-content-brand">
+                                        {p.name}
+                                    </span>
+                                    <span className="main-content-industry">
+                                        {p.value}
+                                    </span>
+                                </div>
+                            ))}
                         </div>
                         <div className="details-main-buttons">
 
@@ -153,7 +145,7 @@ const Productdetails = () => {
                 <div className="details-main-descriptionescription">
                     <h3 className="main-description-heading">Product Description</h3>
                     <div className="main-description-product">
-                        <p className="description-product-para" dangerouslySetInnerHTML={{__html: product.description}} />
+                        <p className="description-product-para" dangerouslySetInnerHTML={{ __html: product.description }} />
                     </div>
                     <h3 className="main-description-heading">
                         Specification
@@ -165,7 +157,6 @@ const Productdetails = () => {
                                 {p.value}
                             </p>
                         ))}
-
                     </div>
                 </div>
             </div>
