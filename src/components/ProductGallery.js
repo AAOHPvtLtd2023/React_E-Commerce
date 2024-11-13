@@ -1,75 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Gallery } from "react-grid-gallery";
+import { db } from "./firebaase.js";  // Import your Firebase setup
 import './ProductGallery.css';
 
 const ProductGallery = () => {
-    const images = [
-        {
-            src: "https://c2.staticflickr.com/9/8817/28973449265_07e3aa5d2e_b.jpg",
-            width: 420,
-            height: 174,
-            caption: "After Rain (Jeshu John - designerspics.com)",
-        },
-        {
-            src: "https://c2.staticflickr.com/9/8356/28897120681_3b2c0f43e0_b.jpg",
-            width: 420,
-            height: 174,
-            tags: [
-                { value: "Ocean", title: "Ocean" },
-                { value: "People", title: "People" },
-            ],
-            alt: "Boats (Jeshu John - designerspics.com)",
-        },
-        {
-            src: "https://c4.staticflickr.com/9/8887/28897124891_98c4fdd82b_b.jpg",
-            width: 420,
-            height: 174,
-            borderRadious:10
-        },
-        {
-            src: "https://c4.staticflickr.com/9/8887/28897124891_98c4fdd82b_b.jpg",
-            width: 420,
-            height: 174,
-            
-        },{
-            src: "https://c4.staticflickr.com/9/8887/28897124891_98c4fdd82b_b.jpg",
-            width: 320,
-            height: 212,
-        },{
-            src: "https://c4.staticflickr.com/9/8887/28897124891_98c4fdd82b_b.jpg",
-            width: 320,
-            height: 212,
-        },
-        {
-            src: "https://c4.staticflickr.com/9/8887/28897124891_98c4fdd82b_b.jpg",
-            width: 320,
-            height: 212,
-        },{
-            src: "https://c4.staticflickr.com/9/8887/28897124891_98c4fdd82b_b.jpg",
-            width: 320,
-            height: 212,
-        },{
-            src: "https://c4.staticflickr.com/9/8887/28897124891_98c4fdd82b_b.jpg",
-            width: 320,
-            height: 212,
-        },{
-            src: "https://c4.staticflickr.com/9/8887/28897124891_98c4fdd82b_b.jpg",
-            width: 320,
-            height: 212,
-        },{
-            src: "https://c4.staticflickr.com/9/8887/28897124891_98c4fdd82b_b.jpg",
-            width: 320,
-            height: 212,
-            
-        },
-    ];
-    return (
-        <>
-            <div>
-                <Gallery images={images} style={{gap:20}} />
-            </div>
-        </>
-    )
-}
+  const [images, setImages] = useState([]);
+
+  // Fetch images from Firestore
+  useEffect(() => {
+    const fetchGalleryImages = async () => {
+      try {
+        const imagesSnapshot = await db.collection("gallery").get();
+        const imagesData = imagesSnapshot.docs.map(doc => {
+          const image = doc.data();
+          return {
+            src: image.url,
+            thumbnail: image.url,  // Assuming the thumbnail and full image are the same
+            caption: "", // You can add captions if needed
+            thumbnailWidth: 150,
+            thumbnailHeight: 150,
+            id: doc.id, // Optionally store the doc ID
+          };
+        });
+        setImages(imagesData);
+      } catch (error) {
+        console.error("Error fetching gallery images:", error);
+      }
+    };
+
+    fetchGalleryImages();
+  }, []);
+
+  return (
+    <div>
+      {/* Display the gallery */}
+      <Gallery images={images} style={{ gap: 20 }} />
+    </div>
+  );
+};
 
 export default ProductGallery;

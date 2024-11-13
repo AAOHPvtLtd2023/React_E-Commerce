@@ -153,12 +153,7 @@ const Productdetails = () => {
                 <div className="details-main-descriptionescription">
                     <h3 className="main-description-heading">Product Description</h3>
                     <div className="main-description-product">
-                        <p className="description-product-para">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam bibendum gravida nunc. Aliquam ut ante quis magna posuere vehicula sed a ipsum. Donec purus massa, sagittis eget condimentum nec, sagittis varius erat. Vivamus sodales turpis et posuere auctor. Nam non eros quis nulla cursus consequat. Integer facilisis, ante ac varius dictum, lectus sapien tincidunt magna, non gravida orci nisi et mi. Fusce a dolor feugiat, pretium nibh non, iaculis ipsum. Phasellus id tincidunt quam. Integer erat eros, tincidunt at consequat porta, maximus ac ex. Integer vitae interdum felis.</p>
-                    </div>
-                    <div className="main-description-product">
-                        <p classNam="description-product-para">Sed nisl justo, mollis quis accumsan ut, dictum vel turpis. Sed sit amet volutpat turpis. Nam mattis, risus vel auctor venenatis, eros lacus fermentum nisl, at ultrices felis elit sed odio. In nec eros ac leo malesuada commodo in quis elit. Vivamus vehicula arcu id lorem elementum lacinia. Sed pharetra, eros ac eleifend placerat, massa nisi venenatis quam, eget maximus leo nunc in justo. Nam orci neque, pretium id rutrum venenatis, convallis a ante. Pellentesque ante metus, consequat sit amet massa vitae, condimentum vehicula ex. Vivamus congue ut enim ut malesuada. Morbi auctor nisl eu posuere sodales.
-                            Sed nisl justo, mollis quis accumsan ut, dictum vel turpis. Sed sit amet volutpat turpis. Nam mattis, risus vel auctor venenatis, eros lacus fermentum nisl, at ultrices felis elit sed odio. In nec eros ac leo malesuada commodo in quis elit. Vivamus vehicula arcu id lorem elementum lacinia. Sed pharetra, eros ac eleifend placerat, massa nisi venenatis quam, eget maximus leo nunc in justo. Nam orci neque, pretium id rutrum venenatis, convallis a ante. Pellentesque ante metus, consequat sit amet massa vitae, condimentum vehicula ex. Vivamus congue ut enim ut malesuada. Morbi auctor nisl eu posuere sodales.
-                        </p>
+                        <p className="description-product-para" dangerouslySetInnerHTML={{__html: product.description}} />
                     </div>
                     <h3 className="main-description-heading">
                         Specification
@@ -176,7 +171,7 @@ const Productdetails = () => {
             </div>
 
             <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '3%' }}>
-                <iframe width="868" height="488" src="https://www.youtube.com/embed/m9s1NQG3TNY" title="MR BEAST PARODY 🤑 Ft. INDIAN CREATORS | CARRYMINATI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style={{ borderRadius: 5 }}></iframe>
+                <iframe width="868" height="488" src={product.productVideo} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style={{ borderRadius: 5 }}></iframe>
             </div>
 
             <div className="details-main-oth-product">
