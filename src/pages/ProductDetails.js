@@ -89,7 +89,7 @@ const Productdetails = () => {
                         <div className="details-main-price">
                             <span className="main-price-offerprice">₹{product.price}</span>
                             <span className="main-price-baseprice">₹{product.price + 20000}</span>
-                            <span className="main-price-discount">(22% 0ff)</span>
+                            <span className="main-price-discount">(Offer applied)</span>
                         </div>
                         <div className="details-main-detailsword">
                             {product.description &&
