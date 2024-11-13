@@ -63,7 +63,7 @@ const Productdetails = () => {
         const words = description.split(' ');
 
         // Take the first 60 words and join them back into a string
-        const trimmedDescription = words.slice(0, 60).join(' ');
+        const trimmedDescription = words.slice(0, 30).join(' ');
 
         // If the description is longer than 60 words, append '...'
         return trimmedDescription.length < description.length ? trimmedDescription + '...' : trimmedDescription;
