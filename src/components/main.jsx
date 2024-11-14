@@ -72,7 +72,7 @@ const Home = () => {
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
-        <div className="photo-gallery-main">Exhibit</div>
+        <div className="photo-gallery-main">Photo Gallery</div>
         <ProductGallery />
         <div className="comment-area-main">
           <strong>Comment Section</strong>

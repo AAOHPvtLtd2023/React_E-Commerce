@@ -61,7 +61,6 @@ const DemoCarousel = () => {
         <div key={index}>
           <Link to={"/product/" + image.catId + "/" + image.productId}>
             <img src={image.imageUrl} alt={`image-${index}`} className="imageStyle"/>
-            <p className="legend">{image.title}</p>
           </Link>
         </div>
       ))}

@@ -12,23 +12,11 @@ const Productdetails = () => {
     const [reviews, setReviews] = useState(null);
     const { catId, productId } = useParams();
     const [product, setProduct] = useState([]);
-    const [similarProducts, setSimilarProducts] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [loading2, setLoading2] = useState(false);
     const [description, setDescription] = useState('');
+    const [videoUrl, setVideoUrl] = useState('');
 
     useEffect(() => {
-        const generateRandomStar = () => {
-            const min = 3;
-            const max = 5;
-            const random = Math.random() * (max - min) + min;
-            setRatings(random.toFixed(3)); // limiting to 3 decimal places
-        };
-        const generateRandomReview = () => {
-            const random = Math.floor(Math.random() * (500 - 100 + 1)) + 400; // Only 4 or 5
-            setReviews(random); // limiting to 3 decimal places
-        };
-
         const fetchProduct = async () => {
             setLoading(true);
             try {
@@ -44,6 +32,11 @@ const Productdetails = () => {
                 console.log(productData);
                 const sanitizedDescription = sanitizeHtml(productData.description);
                 setDescription(sanitizedDescription);
+
+                // Set video URL if available
+                if (productData.videoURL) {
+                    setVideoUrl(productData.videoURL.replace("watch?v=", "embed/"));
+                }
             } catch (error) {
                 console.error('Error fetching data: ', error);
             } finally {
@@ -52,10 +45,6 @@ const Productdetails = () => {
         };
 
         fetchProduct();
-        generateRandomStar();
-        generateRandomReview();
-
-
     }, [catId, productId])
 
     const trimDescription = (description) => {
@@ -67,6 +56,23 @@ const Productdetails = () => {
 
         // If the description is longer than 60 words, append '...'
         return trimmedDescription.length < description.length ? trimmedDescription + '...' : trimmedDescription;
+    };
+
+    const renderVideo = () => {
+        return videoUrl ? (
+            <div className="details-main-video">
+                <h3 className="main-description-heading">Product Video</h3>
+                <iframe
+                    width="80%"
+                    height="400px"
+                    src={videoUrl}
+                    title="Product Video"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                ></iframe>
+            </div>
+        ) : null;
     };
 
     return (
@@ -83,8 +89,8 @@ const Productdetails = () => {
                     <div className="details-main-wrap-smalldetils">
                         <span className="details-main-title">{product.title}</span>
                         <div className="details-main-reviews">
-                            <Rating name="read-only" value={ratings} readOnly color="#ff6a00" />
-                            <span className="main-reviews-content">{reviews} reviews</span>
+                            <Rating name="read-only" value={product.rating} readOnly color="#ff6a00" />
+                            <span className="main-reviews-content">{product.reviews} reviews</span>
                         </div>
                         <div className="details-main-price">
                             <span className="main-price-offerprice">₹{product.price}</span>
@@ -108,16 +114,6 @@ const Productdetails = () => {
                                 </span>
                             </div>
 
-                            {product.specifications && product.specifications.slice(0, 4).map((p) => (
-                                <div className="details-main-content">
-                                    <span className="main-content-brand">
-                                        {p.name}
-                                    </span>
-                                    <span className="main-content-industry">
-                                        {p.value}
-                                    </span>
-                                </div>
-                            ))}
                         </div>
                         <div className="details-main-buttons">
 
@@ -151,19 +147,14 @@ const Productdetails = () => {
                         Specification
                     </h3>
                     <div className="main-description-product">
-                        {product.specifications && product.specifications.map((p) => (
-                            <p classNam="description-product-para-spec">
-                                {p.name}:
-                                {p.value}
-                            </p>
-                        ))}
+                        <div className="main-description-product">
+                            <p className="description-product-para" dangerouslySetInnerHTML={{ __html: product.specifications }} />
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '3%' }}>
-                <iframe width="868" height="488" src={product.productVideo} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style={{ borderRadius: 5 }}></iframe>
-            </div>
+            {renderVideo()}
 
             <div className="details-main-oth-product">
                 {/* <ProductCard/> */}

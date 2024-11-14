@@ -73,6 +73,88 @@ const ContactPage = () => {
         <h1 className="text-center">Contact Us</h1>
         <hr />
 
+
+        <div class="row my-4 h-100">
+          <div className="col-md-4 col-lg-4 col-sm-8 mx-auto">
+            <form ref={form} onSubmit={sendEmail}>
+              <div className="form my-3">
+                <label for="Name" style={{ color: '#ff6a00' }}  >Name</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="Name"
+                  name="Name"
+                  value={userData.Name}
+                  onChange={handleInputChange}
+                  placeholder="Enter your name"
+                />
+              </div>
+              <div className="form my-3">
+                <label for="Email" style={{ color: '#ff6a00' }}>Email</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="mobileno"
+                  name="Email"
+                  value={userData.Email}
+                  onChange={handleInputChange}
+                  placeholder="name@example.com"
+                />
+              </div>
+
+              <div className="form my-3">
+                <label for="Phone no" style={{ color: '#ff6a00' }}>Phone no</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="phone"
+                  name="mobile"
+                  value={userData.mobile}
+                  onChange={handleInputChange}
+                  placeholder="Enter your Phone No"
+                />
+              </div>
+
+              <div className="form  my-3">
+                <label for="Address" style={{ color: '#ff6a00' }}>Address</label>
+                <textarea
+                  rows={2}
+                  className="form-control"
+                  id="Address"
+                  name="Address"
+                  value={userData.Address}
+                  onChange={handleInputChange}
+                  placeholder="Enter your Address"
+                />
+              </div>
+
+
+
+              <div className="form  my-3">
+                <label for="Message" style={{ color: '#ff6a00' }}>Message</label>
+                <textarea
+                  rows={5}
+                  className="form-control"
+                  id="Password"
+                  name="message"
+                  placeholder="Enter your message"
+                />
+              </div>
+              <div className="text-center">
+                <button
+                  className="my-2 px-4 mx-auto btn btn-dark"
+                  type="submit"
+                  value="Send"
+                  onClick={handleSaveData}
+                  style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 5 }}
+                >
+                  Send
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#ff6a00" d="M3 20v-6l8-2l-8-2V4l19 8l-19 8Z" /></svg>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
         <div className="all-admin-card">
 
           <div className="Admin-contact">
@@ -97,88 +179,19 @@ const ContactPage = () => {
             <strong>8328977393 (Biswajit)</strong>
           </div>
         </div>
-        <div class="row my-4 h-100">
-          <div className="col-md-4 col-lg-4 col-sm-8 mx-auto">
-            <form ref={form} onSubmit={sendEmail}>
-              <div className="form my-3">
-                <label for="Name" style={{color:'#ff6a00'}}  >Name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="Name"
-                  name="Name"
-                  value={userData.Name}
-                  onChange={handleInputChange}
-                  placeholder="Enter your name"
-                />
-              </div>
-              <div className="form my-3">
-                <label for="Email" style={{color:'#ff6a00'}}>Email</label>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="mobileno"
-                  name="Email"
-                  value={userData.Email}
-                  onChange={handleInputChange}
-                  placeholder="name@example.com"
-                />
-              </div>
 
-              <div className="form my-3">
-                <label for="Phone no" style={{color:'#ff6a00'}}>Phone no</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="phone"
-                  name="mobile"
-                  value={userData.mobile}
-                  onChange={handleInputChange}
-                  placeholder="Enter your Phone No"
-                />
-              </div>
-
-              <div className="form  my-3">
-                <label for="Address" style={{color:'#ff6a00'}}>Address</label>
-                <textarea
-                  rows={2}
-                  className="form-control"
-                  id="Address"
-                  name="Address"
-                  value={userData.Address}
-                  onChange={handleInputChange}
-                  placeholder="Enter your Address"
-                />
-              </div>
-
-
-
-              <div className="form  my-3">
-                <label for="Message" style={{color:'#ff6a00'}}>Message</label>
-                <textarea
-                  rows={5}
-                  className="form-control"
-                  id="Password"
-                  name="message"
-                  placeholder="Enter your message"
-                />
-              </div>
-              <div className="text-center">
-                <button
-                  className="my-2 px-4 mx-auto btn btn-dark"
-                  type="submit"
-                  value="Send"
-                  onClick={handleSaveData}
-                  style={{display:'flex',justifyContent:'center', alignItems:'center',gap:5}}
-                >
-                  Send
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#ff6a00" d="M3 20v-6l8-2l-8-2V4l19 8l-19 8Z" /></svg>
-                </button>
-              </div>
-            </form>
-          </div>
+        <div className="map-container my-4" style={{ display: 'flex', justifyContent: 'center' }}>
+          <iframe
+            title="location-map"
+            src="https://www.google.com/maps/place/Bajarang+industries/@13.016374,77.496778,15z/data=!4m6!3m5!1s0x3bae3daf7ad6bd37:0xb91fdcfd81e5aa8!8m2!3d13.016374!4d77.496778!16s%2Fg%2F11k60nl49m?entry=ttu&g_ep=EgoyMDI0MTExMS4wIKXMDSoASAFQAw%3D%3D"
+            width="100%"
+            height="450"
+            style={{ border: 0 }}
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
         </div>
-        
       </div>
       <Footer />
     </>
