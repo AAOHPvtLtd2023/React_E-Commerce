@@ -8,8 +8,6 @@ import { Link, useParams } from "react-router-dom";
 import sanitizeHtml from 'sanitize-html';
 
 const Productdetails = () => {
-    const [ratings, setRatings] = useState(null);
-    const [reviews, setReviews] = useState(null);
     const { catId, productId } = useParams();
     const [product, setProduct] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -93,7 +91,7 @@ const Productdetails = () => {
                     <div className="details-main-wrap-smalldetils">
                         <span className="details-main-title">{product.title}</span>
                         <div className="details-main-reviews">
-                            <Rating name="read-only" value={product.rating} readOnly color="#ff6a00" />
+                            <Rating name="read-only" value={4} readOnly color="#ff6a00" />
                             <span className="main-reviews-content">{product.reviews} reviews</span>
                         </div>
                         <div className="details-main-price">
@@ -127,7 +125,7 @@ const Productdetails = () => {
                                 </span>
                             </div>
                             <div className="details-main-quotes">
-                                <a href="tel:977062436">
+                                <a href="tel:9777062436">
                                     <span className="main-quotes-content">
                                         Call Now
                                     </span>
