@@ -6,6 +6,10 @@
     justify-content: space-between;
 } */
 
+
+ul{
+  padding-left: 0
+}
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500&display=swap");
 .row {
   display: flex;
@@ -84,12 +88,24 @@ ul {
   color: #fff;
   background-color: #ff6a00;
 }
+.iso-logo{
+  width: 150px; 
+}
 
 /*responsive*/
 @media (max-width: 767px) {
   .footer-col {
     width: 50%;
     margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* filter: grayscale(100%); */
+    /* filter: grayscale(100%) brightness(200%) contrast(100%); */
+  }
+  .iso-logo{
+    width: 100px; 
   }
   .footer-col1 {
     display: flex;
@@ -97,10 +113,10 @@ ul {
     padding-left: 50px;
   }
   .footer-col h4 {
-    font-size: 28px;
+    font-size: 22px;
     color: #ff6a00;
     text-transform: capitalize;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
     font-weight: 500;
     position: relative;
     display: flex;
@@ -121,10 +137,9 @@ ul {
   .footer-col ul li a {
     font-size: 16px;
     text-transform: capitalize;
-    color: #ff6a00;
+    color: #fff;
     text-decoration: none;
     font-weight: 300;
-    color: #ff6a00;
     display: flex;
     justify-content: center;
     transition: all 0.3s ease;

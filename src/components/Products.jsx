@@ -116,7 +116,7 @@ const Products = () => {
   const ShowProducts = () => {
     return (
       <>
-        <div style={{ display: 'flex', flexDirection: 'row' }}>
+        <div style={{ display: 'flex', flexDirection: 'row',width:'100%',gap:'5%' }}>
           {/* <div className="buttons text-center py-5">
             <button className="btn btn-outline-dark btn-sm m-2" onClick={() => fetchProduct("all")}>
               All

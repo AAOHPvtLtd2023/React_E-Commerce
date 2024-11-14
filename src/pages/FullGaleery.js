@@ -1,13 +1,10 @@
+// FullGallery.js
 import React, { useEffect, useState } from "react";
 import { Gallery } from "react-grid-gallery";
-import { db } from "./firebaase.js";  // Import your Firebase setup
-import './ProductGallery.css';
-import { useNavigate } from "react-router-dom";
+import { db } from "../components/firebaase.js"; // Import your Firebase setup
 
-const ProductGallery = () => {
+const FullGallery = () => {
   const [images, setImages] = useState([]);
-  const [visibleImages, setVisibleImages] = useState(4);
-  const navigate = useNavigate();
 
   // Fetch images from Firestore
   useEffect(() => {
@@ -26,6 +23,7 @@ const ProductGallery = () => {
           };
         });
         setImages(imagesData);
+        console.log("Fullpage is here!!")
       } catch (error) {
         console.error("Error fetching gallery images:", error);
       }
@@ -34,25 +32,11 @@ const ProductGallery = () => {
     fetchGalleryImages();
   }, []);
 
-  // Redirect to full gallery page on "Show More"
-  const handleShowMore = () => {
-    navigate("/Gallery");
-    console.log("Button clicked!!")
-  };
-
   return (
-    <div className="gallery-container">
-      {/* Display limited images */}
-      <Gallery images={images.slice(0, visibleImages)} rowHeight={150} margin={10} />
-
-      {/* Show More button to go to the full gallery */}
-      {visibleImages < images.length && (
-        <button onClick={handleShowMore} className="show-more-btn">
-          Show More
-        </button>
-      )}
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px' }}>
+      <Gallery images={images} rowHeight={150} margin={10} />
     </div>
   );
 };
 
-export default ProductGallery;
+export default FullGallery;

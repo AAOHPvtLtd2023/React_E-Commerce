@@ -1,5 +1,6 @@
 import React from "react";
 import './Designs/Footer.css';
+import ISOLOGO from "../assets/ISO_Certificate.png";
 
 const Footer = () => {
   return (
@@ -23,6 +24,12 @@ const Footer = () => {
             <div class="footer-col1"
             >
              
+            </div>
+            <div class="footer-col">
+              <h4>we are accrirediated with</h4>
+              <ul>
+              <img src={ISOLOGO} alt="A local image" className="iso-logo"/>
+              </ul>
             </div>
             <div class="footer-col">
               <h4>company</h4>

@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Quotes from "./pages/Quotes";
 import Productdetails from "./pages/ProductDetails";
 import ProductGallery from "./components/ProductGallery";
+import FullGallery from "./pages/FullGaleery";
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                     <Route path="/product/*" element={<PageNotFound />} />
                     <Route path="/enquery/:productnm" element={<Quotes />} />
                     <Route path="/Productdetails" element={Productdetails} />
+                    <Route path="/Gallery" element={FullGallery} />
                 </Routes>                
         </>
     );
