@@ -1,16 +1,24 @@
 @media (min-width:768px) {
     .navbar-brand {
         font-size: large;
-        color: #ff6a00;
+        color: #B2130D;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-end;
+      
     }
     .navbar-light .navbar-brand{
-        color: #ff6a00;
+        color: #B2130D;
+
     }
     .collapse{
        visibility: hidden;
     }
     .navbar-toggler{
         visibility: hidden;
+    }
+    .company-logo{
+        width: 80px;
     }
 }
 @media (max-width:768px) {
@@ -22,5 +30,8 @@
     }
     .navbar-toggler{
         visibility: visible;
+    }
+    .company-logo{
+        width: 40px;
     }
 }

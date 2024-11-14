@@ -60,8 +60,11 @@ const Productdetails = () => {
 
     const renderVideo = () => {
         return videoUrl ? (
+            <div  className="details-main-wrap-details">
+
             <div className="details-main-video">
                 <h3 className="main-description-heading">Product Video</h3>
+
                 <iframe
                     width="80%"
                     height="400px"
@@ -71,6 +74,7 @@ const Productdetails = () => {
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                 ></iframe>
+            </div>
             </div>
         ) : null;
     };

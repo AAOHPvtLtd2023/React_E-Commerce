@@ -26,7 +26,7 @@
 
 #feature .fe-box:hover {
     box-shadow: 10px 10px 54px rgba(70, 62, 221, 0.1);
-    background-color:#ff6a00 ;
+    background-color:#B2130D ;
     border-radius: 5px;
     /* color: white; */
 }
@@ -39,7 +39,7 @@
     margin-bottom: 10px;
 }
 #feature .fe-box svg {
-    color: #ff6a00;
+    color: #B2130D;
 }
 #feature .fe-box:hover svg {
     color: #fff;

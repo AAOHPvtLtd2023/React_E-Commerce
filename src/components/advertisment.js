@@ -13,15 +13,12 @@ import { GrUserWorker } from "react-icons/gr";
 import { RiBillLine } from "react-icons/ri";
 import { MdSupportAgent } from "react-icons/md";
 
+
+
 function Smalladv() {
   return (
     <div id="feature" class="section-p1">
-      <div class="fe-box">
-        {/* <img src={a1}/> */}
-        <CiDeliveryTruck size={52} />
-        <h6>Free Shipping</h6>
-      </div>
-
+     
       <div class="fe-box">
         {/* <img src={a2}/> */}
         <CiShoppingCart size={52} />
@@ -44,7 +41,7 @@ function Smalladv() {
         {/* <img src={a5}/> */}
         <RiBillLine size={52} />
 
-        <h6>Happy sale</h6>
+        <h6>Happy sales</h6>
       </div>
 
       <div class="fe-box">

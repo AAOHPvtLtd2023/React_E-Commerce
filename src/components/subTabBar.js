@@ -1,5 +1,6 @@
 import React from "react";
 import "../components/Designs/subTabBar.css";
+import { IoCallOutline } from "react-icons/io5";
 
 const Subtabbar= ()=>{
     return(
@@ -22,7 +23,8 @@ const Subtabbar= ()=>{
                         <a href="/contact">Contact</a>
                     </div>
                     {/* <div className="subtabbar-title">
-                        <a>Free shipping on all orders</a>
+                        <IoCallOutline size={24}/>
+                        <a>+919777062436</a>
                     </div> */}
                 </div>
             </div>

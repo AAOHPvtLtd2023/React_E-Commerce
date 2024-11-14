@@ -47,6 +47,7 @@ const Footer = () => {
                 <li><a href="#">Paper Plate Making Machine</a></li>
                 <li><a href="#">Automatic Paper Cup Making Machine</a></li>
                 <li><a href="#">Non Woven Bag Making Machine</a></li>
+                <li><a href="#">Offset Printing Machine</a></li>
               </ul>
             </div>
             <div class="footer-col">

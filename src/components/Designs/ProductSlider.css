@@ -16,10 +16,10 @@
 }
 
 .product-card:hover{
-  border-color: #ff6a00;
+  border-color: #B2130D;
 }
 .product-card:hover .product-details{
-  border-color: #ff6a00;
+  border-color: #B2130D;
 }
 
 
@@ -45,7 +45,7 @@
 }
 
 .buy-now-button {
-  background-color:#ff6a00;
+  background-color:#B2130D;
   display: flex;
   justify-content: center;
   align-items: center;

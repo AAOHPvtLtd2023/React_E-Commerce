@@ -145,7 +145,7 @@
     align-items: center;
   }
   .cards-content-offerprice{
-    color: #ff6a00;
+    color: #B2130D;
   }
   .cards-content-baseprice{
     color: black;
@@ -156,7 +156,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #ff6a00;
+    background: #B2130D;
     color: white;
     cursor: pointer;
     border-radius: 5px;
@@ -170,12 +170,12 @@
   }
     
     .product-cards:hover{
-      border-color: #ff6a00;
+      border-color: #B2130D;
     }
 
 
     .product-cards:hover .cards-content-title{
-      color: #ff6a00;
+      color: #B2130D;
     }
 
     .categories-subtab{
@@ -209,18 +209,18 @@
       color: #000;
     }
     .categories-subtab-tab:hover span {
-      color: #ff6a00;
+      color: #B2130D;
     }
     .categories-subtab-tab:hover .right-arrow {
-      color: #ff6a00;
+      color: #B2130D;
     }
 
     .categories-subtab-tab:active span{
-      color: #ff6a00;
+      color: #B2130D;
     }
 
     .categories-subtab-tab:active .right-arrow {
-      color: #ff6a00;
+      color: #B2130D;
     }
 
     
@@ -244,7 +244,7 @@
      right: 30px;
      height: 50px;
      width: fit-content;
-     background-color: #ff6a00;
+     background-color: #B2130D;
      display: none;
      justify-content: center;
      align-items: center;
@@ -281,7 +281,7 @@
         right: 30px;
         height: 50px;
         width: fit-content;
-        background-color: #ff6a00;
+        background-color: #B2130D;
         display: flex;
         justify-content: center;
         align-items: center;
