@@ -10,6 +10,7 @@ import "../components/Designs/main.css";
 import CommentBox from "./CommentBox.jsx";
 import Subtabbar from "./subTabBar.js";
 import ProductGallery from "./ProductGallery.js";
+import CertificateList from "./Designs/CerificateList.js";
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -72,6 +73,8 @@ const Home = () => {
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
+        <div className="photo-gallery-main">We Are Recognized And Certified</div>
+        <CertificateList />
         <div className="photo-gallery-main">Photo Gallery</div>
         <ProductGallery />
         <div className="comment-area-main">

@@ -8,6 +8,7 @@ import { CiStar } from "react-icons/ci";
 import { Link, useParams } from "react-router-dom";
 import { Box, Modal } from "@mui/material";
 import { IoIosArrowUp } from "react-icons/io";
+import DieProduct from "./DieProduct.js";
 const Products = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -215,14 +216,21 @@ const Products = () => {
               </Box>
             </Modal>
           </div>
+
         </div>
+
+<div style={{display:'flex',flexDirection:'column',marginTop:'2%'}}>
+  
+        <h3 style={{color:'#B2130D'}}>Other Products</h3>
+          <DieProduct/>
+</div>
 
       </>
     );
   };
   return (
     <>
-      <div className="container my-3 py-3" >
+      <div className="container-Products my-3 py-3" >
         <div className="row" >
           <div className="col-12">
             <h2 className="display-5 text-center"> Our Products</h2>

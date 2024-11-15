@@ -164,6 +164,16 @@ iframe{
     width: "868px";
     height: "488px";
 }
+.details-main-similar-product{
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+.details-main-similar-product h3{
+   color: #B2130D;
+   font-size: 1.3em;
+}
 @media (max-width:768px) {
     .details-main-wrap{
         display: flex;

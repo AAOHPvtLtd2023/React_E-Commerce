@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "../components/Designs/CommentBox.css";
 const comments = [
   {
@@ -145,8 +145,60 @@ const comments = [
 
 
 const CommentsSection = () => {
+  const containerRef = useRef(null);
+  const isUserScrolling = useRef(false); // Track user interaction
+
+  useEffect(() => {
+    const scrollContainer = containerRef.current;
+    let animationFrameId;
+    let scrollAmount = 0;
+    let resumeTimeout;
+
+    const smoothScroll = () => {
+      if (!isUserScrolling.current && scrollContainer) {
+        scrollContainer.scrollLeft += 1; // Adjust the speed
+        scrollAmount += 1;
+
+        if (
+          scrollAmount >=
+          scrollContainer.scrollWidth - scrollContainer.clientWidth
+        ) {
+          scrollContainer.scrollLeft = 0;
+          scrollAmount = 0;
+        }
+      }
+      animationFrameId = requestAnimationFrame(smoothScroll);
+    };
+
+    const pauseScrolling = () => {
+      isUserScrolling.current = true;
+      clearTimeout(resumeTimeout); 
+    };
+
+    const resumeScrolling = () => {
+      resumeTimeout = setTimeout(() => {
+        isUserScrolling.current = false;
+      }, 2000); // Resume scrolling after 2 second of inactivity
+    };
+
+    scrollContainer.addEventListener("mousedown", pauseScrolling);
+    scrollContainer.addEventListener("touchstart", pauseScrolling);
+    scrollContainer.addEventListener("mouseup", resumeScrolling);
+    scrollContainer.addEventListener("touchend", resumeScrolling);
+
+    animationFrameId = requestAnimationFrame(smoothScroll);
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      clearTimeout(resumeTimeout);
+      scrollContainer.removeEventListener("mousedown", pauseScrolling);
+      scrollContainer.removeEventListener("touchstart", pauseScrolling);
+      scrollContainer.removeEventListener("mouseup", resumeScrolling);
+      scrollContainer.removeEventListener("touchend", resumeScrolling);
+    };
+  }, []);
   return (
-    <div className="comments-container">
+    <div className="comments-container" ref={containerRef}>
       {comments.map((comment) => (
         <div key={comment.id} className="comment-card">
           <div

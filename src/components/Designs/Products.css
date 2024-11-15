@@ -88,7 +88,16 @@
     display: flex;
     justify-content: space-around;
   }
+  .container-Products{
+    width: 100%;
+  }
 
+  .row{
+    width: 100%;
+    --bs-gutter-x: 0rem;
+    padding-right: 0;
+    margin-right: 0;
+  }
   /* .row justify-content-center .col-md-4 col-sm-6 col-xs-8 col-12 mb-4{
     display: flex;
     flex-direction: row;
@@ -116,6 +125,10 @@
     flex-direction: column;
     margin-right: 50px;
     background: white;
+  }
+
+  .col-a2{
+    width: 100%;
   }
 
   }
@@ -150,6 +163,7 @@
   .cards-content-baseprice{
     color: black;
     text-decoration: line-through;
+    width: 100%;
   }
   .product-cards-buynow{
     width:100%;
@@ -189,6 +203,7 @@
       /* align-items: center; */
       border-radius: 0px;
       scrollbar-width: none;
+      margin-left: 2%;
     }
 
     .categories-subtab-tab{
