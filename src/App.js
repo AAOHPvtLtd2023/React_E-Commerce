@@ -5,6 +5,8 @@ import Productdetails from "./pages/ProductDetails";
 import FullGallery from "./pages/FullGallery";
 import FloatingButtons from "./components/FloatingButton";
 import { Footer, Navbar } from "./components";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsCondition from "./pages/TermsCondition";
 
 function App() {
     return (
@@ -23,6 +25,8 @@ function App() {
                 <Route path="/product/*" element={<PageNotFound />} />
                 <Route path="/enquery/:productnm" element={<Quotes />} />
                 <Route path="/Gallery" element={<FullGallery />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy/>} />
+                <Route path="/terms-condition" element={<TermsCondition/>} />
             </Routes>
             <Footer />
         </>
