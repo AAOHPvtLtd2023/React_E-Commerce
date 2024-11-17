@@ -1,7 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Footer, Navbar } from "../components";
 import emailjs from '@emailjs/browser';
-import parsePhoneNumber from 'libphonenumber-js';
 import firebase from 'firebase/compat/app';
 import './ContactPage.css';
 
@@ -49,9 +47,6 @@ const ContactPage = () => {
 
   const sendEmail = (e) => {
     e.preventDefault();
-
-    // try
-    // await 
     handleSaveData();
 
 
@@ -67,13 +62,9 @@ const ContactPage = () => {
 
   return (
     <>
-      {/* <Navbar /> */}
-
       <div className="container my-3 py-3 ">
         <h1 className="text-center">Contact Us</h1>
         <hr />
-
-
         <div class="row my-4 h-100">
           <div className="col-md-4 col-lg-4 col-sm-8 mx-auto">
             <form ref={form} onSubmit={sendEmail}>
@@ -128,8 +119,6 @@ const ContactPage = () => {
                 />
               </div>
 
-
-
               <div className="form  my-3">
                 <label for="Message" style={{ color: '#ff6a00' }}>Message</label>
                 <textarea
@@ -156,7 +145,6 @@ const ContactPage = () => {
           </div>
         </div>
         <div className="all-admin-card">
-
           <div className="Admin-contact">
             {/* //add here */}
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path fill="none" stroke="#ff6a00" stroke-width="2" d="M12 22s-8-6-8-12c0-5 4-8 8-8s8 3 8 8c0 6-8 12-8 12Zm0-9a3 3 0 1 0 0-6a3 3 0 0 0 0 6Z" /></svg>
@@ -179,21 +167,19 @@ const ContactPage = () => {
             <strong>8328977393 (Biswajit)</strong>
           </div>
         </div>
-
         <div className="map-container my-4" style={{ display: 'flex', justifyContent: 'center' }}>
           <iframe
             title="location-map"
-            src="https://www.google.com/maps/place/Bajarang+industries/@13.016374,77.496778,15z/data=!4m6!3m5!1s0x3bae3daf7ad6bd37:0xb91fdcfd81e5aa8!8m2!3d13.016374!4d77.496778!16s%2Fg%2F11k60nl49m?entry=ttu&g_ep=EgoyMDI0MTExMS4wIKXMDSoASAFQAw%3D%3D"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3111.842292227214!2d-77.03687048465463!3d38.8976769795704!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0:0x4b6e84b61d0f4030!2zMzjCsDUzJzUyLjkiTiA3N8KwMDInMTEuNSJX!5e0!3m2!1sen!2sus!4v1690240923856!5m2!1sen!2sus"
             width="100%"
             height="450"
             style={{ border: 0 }}
-            allowFullScreen=""
+            allowFullScreen
             loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
         </div>
+
       </div>
-      <Footer />
     </>
   );
 };

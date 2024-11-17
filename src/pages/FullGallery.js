@@ -1,4 +1,3 @@
-// FullGallery.js
 import React, { useEffect, useState } from "react";
 import { Gallery } from "react-grid-gallery";
 import { db } from "../components/firebaase.js"; // Import your Firebase setup
@@ -20,9 +19,13 @@ const FullGallery = () => {
             thumbnailWidth: 150,
             thumbnailHeight: 150,
             id: doc.id,
+            tags: [
+              {value: image.loc|| "", title: image.loc || ""}
+            ]
           };
         });
         setImages(imagesData);
+        console.log(imagesData);
         console.log("Fullpage is here!!")
       } catch (error) {
         console.error("Error fetching gallery images:", error);
@@ -33,9 +36,13 @@ const FullGallery = () => {
   }, []);
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px' }}>
-      <Gallery images={images} rowHeight={150} margin={10} />
-    </div>
+    <>
+      {/* <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px' }}> */}
+      {images &&
+        <Gallery images={images} rowHeight={150} margin={10} />
+      }
+      {/* </div> */}
+    </>
   );
 };
 
