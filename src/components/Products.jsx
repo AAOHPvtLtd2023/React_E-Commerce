@@ -221,7 +221,7 @@ const Products = () => {
 
 <div style={{display:'flex',flexDirection:'column',marginTop:'2%'}}>
   
-        <h3 style={{color:'#B2130D'}}>Other Products</h3>
+        <h3 style={{color:'#B2130D'}}>Spare Accessories</h3>
           <DieProduct/>
 </div>
 

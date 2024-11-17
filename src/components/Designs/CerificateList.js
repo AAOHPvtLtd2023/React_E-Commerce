@@ -2,19 +2,19 @@ import React from 'react';
 
 const certificates = [
   {
-    name: 'Machine Learning Certificate',
+    name: 'GST Certificate',
     image: 'https://m.media-amazon.com/images/I/71hI16-vr6L._AC_UF1000,1000_QL80_.jpg', // Replace with actual image URL
   },
   {
-    name: 'Python Certificate',
+    name: 'IEC Certificate',
     image: 'https://m.media-amazon.com/images/I/71hI16-vr6L._AC_UF1000,1000_QL80_.jpg', // Replace with actual image URL
   },
   {
-    name: 'Java Certificate',
+    name: 'ISO Certificate',
     image: 'https://sertifier.com/blog/wp-content/uploads/2020/10/certificate-text-samples.jpg', // Replace with actual image URL
   },
   {
-    name: 'Tableau Certificate',
+    name: 'UDYAM REGISTRATION Certificate',
     image: 'https://i.pinimg.com/originals/63/4e/b3/634eb3ba024051c2faaa165e8c4b8abc.jpg', // Replace with actual image URL
   },
 ];
