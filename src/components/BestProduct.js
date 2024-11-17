@@ -53,7 +53,7 @@ function Bestproduct() {
     bestproduct();
   }, []);
 
- 
+
 
   useEffect(() => {
     // Initialize AOS
@@ -79,6 +79,7 @@ function Bestproduct() {
                 <img
                   className="bestprroductimage"
                   src={p.photos[0]}
+                  alt="Product photos"
                   style={{ height: '200px', width: '300px', borderRadius: '10px' }}
                 />
               </div>

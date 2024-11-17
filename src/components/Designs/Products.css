@@ -271,6 +271,15 @@
       font-weight: 600;
     }
 
+    .diearea{
+      display: flex;
+      flex-direction: column;
+      margin-top: 2%;
+      width: 100%;
+      padding-left: 2%;
+
+    }
+
 
     @media (max-width:768px) {
       .categories-subtab{
@@ -283,6 +292,7 @@
         align-items: center;
         justify-content: center;
         gap: 30px;
+        margin-left: 15%;
       }
       .responsive-categories-subtab{
         height: 100%;
@@ -303,6 +313,15 @@
         padding: 2%;
         border-radius: 5px;
        }
+       .diearea{
+        display: flex;
+        flex-direction: column;
+        margin-top: 5%;
+        width: 100%;
+        padding-left: 2%;
+       justify-content: center;
+       align-items: center; 
+      }
       
     }
 

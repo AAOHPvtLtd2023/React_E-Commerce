@@ -1,13 +1,7 @@
 import React from "react";
 
-import a1 from "../icon/icon1.png";
-import a2 from "../icon/icon2.png";
-import a3 from "../icon/icon3.png";
-import a4 from "../icon/icon4.png";
-import a5 from "../icon/icon5.png";
-import a6 from "../icon/icon6.png";
 import "./Designs/advertisemnt.css";
-import { CiDeliveryTruck, CiShoppingCart } from "react-icons/ci";
+import { CiShoppingCart } from "react-icons/ci";
 import { GiReceiveMoney } from "react-icons/gi";
 import { GrUserWorker } from "react-icons/gr";
 import { RiBillLine } from "react-icons/ri";

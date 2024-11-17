@@ -1,0 +1,86 @@
+/* Container Styles */
+.diecard-container {
+               display: flex;
+               overflow-x: auto;
+               /* Enables horizontal scrolling */
+               gap: 16px;
+               padding: 16px;
+               scrollbar-width: thin;
+               /* For modern browsers */
+               scroll-snap-type: x mandatory;
+               /* Snap cards into view */
+}
+
+/* Card Styles */
+.diecard-card {
+               width: 300px;
+               height: 400px;
+               border: 1px solid #ddd;
+               border-radius: 8px;
+               box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+               padding: 16px;
+               background-color: #fff;
+               flex-shrink: 0;
+               /* Prevents shrinking in a scrollable container */
+               scroll-snap-align: start;
+               /* Aligns card with container edge when scrolling */
+               
+}
+
+/* Image Styles */
+.diecard-image {
+               width: 100%;
+               height: auto;
+               border-radius: 8px;
+               margin-bottom: 8px;
+               object-fit: cover;
+               display: flex;
+               justify-self: center;
+               align-self: center;
+}
+
+/* Name Styles */
+.diecard-name {
+               font-size: 16px;
+               font-weight: bold;
+               color: #333;
+}
+
+/* Price Styles */
+.diecard-price {
+               font-size: 14px;
+               color: #555;
+               margin: 8px 0;
+}
+
+/* Button Styles */
+.diecard-button {
+               padding: 8px 16px;
+               font-size: 14px;
+               background-color: #b2130d;
+               color: #fff;
+               border: none;
+               border-radius: 4px;
+               cursor: pointer;
+               width: 100%;
+               transition: background-color 0.2s;
+}
+
+.diecard-button:hover {
+               background-color: #0056b3;
+}
+
+@media (max-width:768px) {
+               .diecard-container {
+                              display: flex;
+                              overflow-x: auto;
+                              /* Enables horizontal scrolling */
+                              gap: 16px;
+                              padding: 16px;
+                              scrollbar-width: thin;
+                              /* For modern browsers */
+                              scroll-snap-type: x mandatory;
+                              /* Snap cards into view */
+                              flex-direction: column;
+               }
+}

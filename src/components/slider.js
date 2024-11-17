@@ -28,7 +28,7 @@ const DemoCarousel = () => {
     };
 
     fetchImages();
-  }, []); // Empty dependency array to ensure the effect runs only once
+  }, [images]); // Empty dependency array to ensure the effect runs only once
 
   const onChange = (index, item) => {
     // Handle change event
@@ -60,7 +60,7 @@ const DemoCarousel = () => {
       {images.map((image, index) => (
         <div key={index}>
           <Link to={"/product/" + image.catId + "/" + image.productId}>
-            <img src={image.imageUrl} alt={`image-${index}`} className="imageStyle"/>
+            <img src={image.imageUrl} alt={`product-${index}`} className="imageStyle"/>
           </Link>
         </div>
       ))}

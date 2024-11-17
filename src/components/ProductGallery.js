@@ -4,6 +4,7 @@ import { db } from "./firebaase.js";  // Import your Firebase setup
 import './ProductGallery.css';
 import { useNavigate } from "react-router-dom";
 
+
 const ProductGallery = () => {
   const [images, setImages] = useState([]);
   const [visibleImages, setVisibleImages] = useState(4);
@@ -19,10 +20,13 @@ const ProductGallery = () => {
           return {
             src: image.url,
             thumbnail: image.url,
-            caption: image.caption || "",
+            caption: image.loc || "Demo",
             thumbnailWidth: 150,
             thumbnailHeight: 150,
             id: doc.id,
+            tags: [
+              {value: image.loc|| "", title: image.loc || ""}
+            ]
           };
         });
         setImages(imagesData);
@@ -44,7 +48,6 @@ const ProductGallery = () => {
     <div className="gallery-container">
       {/* Display limited images */}
       <Gallery images={images.slice(0, visibleImages)} rowHeight={150} margin={10} />
-
       {/* Show More button to go to the full gallery */}
       {visibleImages < images.length && (
         <button onClick={handleShowMore} className="show-more-btn">

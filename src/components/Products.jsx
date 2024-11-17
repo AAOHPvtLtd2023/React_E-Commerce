@@ -4,11 +4,12 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import "./Designs/Products.css";
 import { FaAngleRight } from "react-icons/fa";
-import { CiStar } from "react-icons/ci";
-import { Link, useParams } from "react-router-dom";
-import { Box, Modal } from "@mui/material";
+import { useParams } from "react-router-dom";
+import { Box, Modal, Rating } from "@mui/material";
 import { IoIosArrowUp } from "react-icons/io";
 import DieProduct from "./DieProduct.js";
+
+
 const Products = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -117,15 +118,7 @@ const Products = () => {
   const ShowProducts = () => {
     return (
       <>
-        <div style={{ display: 'flex', flexDirection: 'row',width:'100%',gap:'5%' }}>
-          {/* <div className="buttons text-center py-5">
-            <button className="btn btn-outline-dark btn-sm m-2" onClick={() => fetchProduct("all")}>
-              All
-            </button>
-            {categories.map((cat) => (
-              <button key={cat} className="btn btn-outline-dark btn-sm m-2" onClick={() => fetchProduct(cat.id)}>{cat.name}</button>
-            ))}
-          </div> */}
+        <div style={{ display: 'flex', flexDirection: 'row', width: '100%', gap: '5%' }}>
           <div className="categories-subtab">
             <div className="categories-subtab-tab">
               <FaAngleRight className="right-arrow" />
@@ -151,11 +144,11 @@ const Products = () => {
                   <div className="product-cards-content">
                     <span className="cards-content-title">{product.title}</span>
                     <div className="cards-content-price">
-                      <CiStar />
-                      <CiStar />
-                      <CiStar />
-                      <CiStar />
-                      (255 reviews)
+                      {
+                        product.rating &&
+                        <Rating name="read-only" value={product.rating} readOnly color="#ff6a00" />
+                      }
+                      ({product.reviews} reviews)
                     </div>
                   </div>
                   <a href={`/product/${product.category}/${product.id}`}>
@@ -171,7 +164,7 @@ const Products = () => {
           <div className="responsive-categories-subtab">
             <div className="responsive-categories-subtab-button" onClick={handleOpen}>
               <span>
-                <IoIosArrowUp size={30}/>
+                <IoIosArrowUp size={30} />
               </span>
             </div>
             <Modal
@@ -182,9 +175,9 @@ const Products = () => {
 
             >
               <Box sx={{
-                width: '80%', 
-                height: '90%', 
-                maxWidth: '90%', 
+                width: '80%',
+                height: '90%',
+                maxWidth: '90%',
                 maxHeight: '90%',
                 bgcolor: 'background.paper',
                 boxShadow: 24,
@@ -196,7 +189,8 @@ const Products = () => {
                 <div className="categories-subtab-responsive">
                   <div className="categories-subtab-tab">
                     <FaAngleRight className="right-arrow" />
-                    <span onClick={() => {fetchProduct("all")
+                    <span onClick={() => {
+                      fetchProduct("all")
                       setOpen(false)
                     }}>
                       ALL
@@ -205,7 +199,8 @@ const Products = () => {
                   {categories.map((cat) => (
                     <div className="categories-subtab-tab">
                       <FaAngleRight className="right-arrow" />
-                      <span onClick={() => {fetchProduct(cat.id)
+                      <span onClick={() => {
+                        fetchProduct(cat.id)
                         setOpen(false);
                       }}>
                         {cat.name}
@@ -219,11 +214,11 @@ const Products = () => {
 
         </div>
 
-<div style={{display:'flex',flexDirection:'column',marginTop:'2%'}}>
-  
-        <h3 style={{color:'#B2130D'}}>Other Products</h3>
-          <DieProduct/>
-</div>
+        <div className="diearea">
+
+          <h3 style={{ color: '#B2130D' }}>Other Products</h3>
+          <DieProduct />
+        </div>
 
       </>
     );

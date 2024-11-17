@@ -1,67 +1,66 @@
-import React, {useEffect, useState} from "react";
-import { Footer, Navbar } from "../components";
+import React, { useEffect, useState } from "react";
 import firebase from 'firebase/compat/app';
 import { useParams } from "react-router-dom";
 
 const Quotes = () => {
   const { productnm } = useParams();
-    const [userData, setUserData] = useState({
-      ProductName: '',
-      Name: '',
-      mobile: '',
-      Address: ''
-    });
+  const [userData, setUserData] = useState({
+    ProductName: '',
+    Name: '',
+    mobile: '',
+    Address: ''
+  });
 
-    useEffect(() => {
-      setUserData(prevUserData => ({
-        ...prevUserData,
-        ProductName: productnm
-      }));
-    },[productnm])
-  
-    const handleInputChange = (e) => {
-      const { name, value } = e.target;
-      setUserData((prevData) => ({
-        ...prevData,
-        [name]: value
-      }));
-    };
-  
-   
-  
-    const handleSaveData = async () => {
-      try {
-       
-        const db = firebase.firestore();
-        const documentId = userData.mobile;
-        await db.collection('Enquary User').doc(documentId).set(userData);
-      } catch (error) {
-      }
-    };
-  
+  useEffect(() => {
+    setUserData(prevUserData => ({
+      ...prevUserData,
+      ProductName: productnm
+    }));
+  }, [productnm])
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUserData((prevData) => ({
+      ...prevData,
+      [name]: value
+    }));
+  };
+
+
+
+  const handleSaveData = async () => {
+    try {
+
+      const db = firebase.firestore();
+      const documentId = userData.mobile;
+      await db.collection('Enquary User').doc(documentId).set(userData);
+    } catch (error) {
+    }
+  };
+
 
 
   return (
     <>
-       <div className="container my-3 py-3">
+      <div className="container my-3 py-3">
         <h1 className="text-center">Enquery Here</h1>
         <hr />
         <div class="row my-4 h-100">
           <div className="col-md-4 col-lg-4 col-sm-8 mx-auto">
             <form >
-            <div className="form my-3">
+              <div className="form my-3">
                 <label for="Name"  >Product Name</label>
                 <input
                   type="text"
                   className="form-control"
                   id="ProductName"
                   name="ProductName"
-                  value={userData.ProductName} 
+                  value={userData.ProductName}
                   onChange={handleInputChange}
                   placeholder="Enter your name"
                 />
               </div>
-              
+
               <div className="form my-3">
                 <label for="Name"  >Name</label>
                 <input
@@ -69,7 +68,7 @@ const Quotes = () => {
                   className="form-control"
                   id="Name"
                   name="Name"
-                  value={userData.Name} 
+                  value={userData.Name}
                   onChange={handleInputChange}
                   placeholder="Enter your name"
                 />
@@ -81,7 +80,7 @@ const Quotes = () => {
                   className="form-control"
                   id="mobileno"
                   name="Email"
-                  value={userData.Email} 
+                  value={userData.Email}
                   onChange={handleInputChange}
                   placeholder="name@example.com"
                 />
@@ -94,7 +93,7 @@ const Quotes = () => {
                   className="form-control"
                   id="phone"
                   name="mobile"
-                  value={userData.mobile} 
+                  value={userData.mobile}
                   onChange={handleInputChange}
                   placeholder="Enter your Phone No"
                 />
@@ -107,7 +106,7 @@ const Quotes = () => {
                   className="form-control"
                   id="Address"
                   name="Address"
-                  value={userData.Address} 
+                  value={userData.Address}
                   onChange={handleInputChange}
                   placeholder="Enter your Address"
                 />

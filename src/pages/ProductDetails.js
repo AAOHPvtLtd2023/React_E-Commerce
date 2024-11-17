@@ -4,14 +4,14 @@ import ProductCard from "../components/ProductSlider";
 import ProductCarousel from "../components/ProductCarsoual";
 import { Rating } from "@mui/material";
 import { db } from "../components/firebaase.js";
-import { Link, useParams } from "react-router-dom";
-import sanitizeHtml from "sanitize-html";
+import { useParams } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const Productdetails = () => {
   const { catId, productId } = useParams();
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [description, setDescription] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
   const [data, setData] = useState([]);
 
@@ -29,8 +29,6 @@ const Productdetails = () => {
         const productData = snapshot.data();
         setProduct(productData);
         console.log(productData);
-        const sanitizedDescription = sanitizeHtml(productData.description);
-        setDescription(sanitizedDescription);
 
         // Set video URL if available
         if (productData.videoURL) {
@@ -101,6 +99,60 @@ const Productdetails = () => {
     fetchProduct();
   }, []);
 
+  if (loading) {
+    return (
+      <>
+        <div className="details-main">
+          <div className="details-main-wrap">
+            <div className="details-main-wrap-image">
+              <Skeleton height={300} width="100%" />
+            </div>
+            <div className="details-main-wrap-smalldetils">
+              <Skeleton height={30} width="70%" />
+              <div className="details-main-reviews">
+                <Skeleton height={20} width={150} />
+                <Skeleton height={20} width={100} style={{ marginLeft: 10 }} />
+              </div>
+              <div className="details-main-price">
+                <Skeleton height={30} width={100} />
+                <Skeleton height={20} width={80} style={{ marginLeft: 10 }} />
+              </div>
+              <div className="details-main-detailsword">
+                <Skeleton height={50} count={3} />
+              </div>
+              <div className="details-main-bajarangi">
+                <Skeleton height={20} width="50%" />
+              </div>
+              <div className="details-main-buttons">
+                <Skeleton height={40} width={120} />
+                <Skeleton height={40} width={120} style={{ marginLeft: 10 }} />
+              </div>
+            </div>
+          </div>
+          <div className="details-main-wrap-details">
+            <h3 className="main-description-heading">Product Description</h3>
+            <Skeleton height={20} count={3} />
+            <h3 className="main-description-heading">Specification</h3>
+            <Skeleton height={20} count={3} />
+          </div>
+          <div className="details-main-similar-product">
+            <h3>Similar Products</h3>
+            <div className="similar-product-grid">
+              {Array.from({ length: 4 }).map((_, idx) => (
+                <div key={idx} className="product-card-skeleton">
+                  <Skeleton height={200} />
+                  <Skeleton height={20} width="80%" />
+                  <Skeleton height={20} width="50%" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+      </>
+    )
+  }
+
   return (
     <div className="details-main">
       <div className="details-main-wrap">
@@ -115,7 +167,10 @@ const Productdetails = () => {
           <div className="details-main-wrap-smalldetils">
             <span className="details-main-title">{product.title}</span>
             <div className="details-main-reviews">
-              <Rating name="read-only" value={4} readOnly color="#ff6a00" />
+              {
+                product.rating &&
+                <Rating name="read-only" value={product.rating} readOnly color="#ff6a00" />
+              }
               <span className="main-reviews-content">
                 {product.reviews} reviews
               </span>
@@ -147,7 +202,9 @@ const Productdetails = () => {
             </div>
             <div className="details-main-buttons">
               <div className="details-main-quotes">
-                <span className="main-quotes-content">Get Quotes</span>
+                <a href={`/enquery/${product.title}`}>
+                  <span className="main-quotes-content">Get Quotes</span>
+                </a>
               </div>
               <div className="details-main-quotes">
                 <a href="tel:9777062436">
