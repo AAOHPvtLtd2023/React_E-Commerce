@@ -8,7 +8,16 @@ const ProductCard = ({ name, image, price }) => (
     <img src={image} alt={name} className='diecard-image' />
     <h3 className='diecard-name'>{name}</h3>
     <p className='diecard-price'>{price}</p>
-    <button className='diecard-button'>Whats'App</button>
+    <button className='diecard-button'
+    ><a
+      href={`https://wa.me/9777062436/?text=Hey Bajarangi Industries 
+I want to buy ${name}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="whatsapp-btn"
+    >Whats'App
+      </a>
+    </button>
   </div>
 );
 
