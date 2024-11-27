@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import firebase from 'firebase/compat/app';
 import { useParams } from "react-router-dom";
 
 const Quotes = () => {
   const { productnm } = useParams();
+  const form = useRef();
   const [userData, setUserData] = useState({
     ProductName: '',
     Name: '',
@@ -16,7 +17,7 @@ const Quotes = () => {
       ...prevUserData,
       ProductName: productnm
     }));
-  }, [productnm])
+  }, [productnm]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -26,30 +27,40 @@ const Quotes = () => {
     }));
   };
 
-
-
   const handleSaveData = async () => {
+    console.log(userData);
     try {
-
       const db = firebase.firestore();
       const documentId = userData.mobile;
-      await db.collection('Enquary User').doc(documentId).set(userData);
+
+      if (!documentId) {
+        console.error('Invalid documentId:', documentId);
+        return;
+      }
+
+      await db.collection('enquiry').doc(documentId).set(userData);
+
+      console.log('User data added to Firestore!');
     } catch (error) {
+      console.error('Error adding user data to Firestore:', error);
     }
   };
 
-
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevents the default page refresh
+    handleSaveData();
+  };
 
   return (
     <>
       <div className="container my-3 py-3">
-        <h1 className="text-center">Enquery Here</h1>
+        <h1 className="text-center">Enquiry Here</h1>
         <hr />
-        <div class="row my-4 h-100">
+        <div className="row my-4 h-100">
           <div className="col-md-4 col-lg-4 col-sm-8 mx-auto">
-            <form >
+            <form ref={form} onSubmit={handleSubmit}>
               <div className="form my-3">
-                <label for="Name"  >Product Name</label>
+                <label htmlFor="ProductName">Product Name</label>
                 <input
                   type="text"
                   className="form-control"
@@ -62,7 +73,7 @@ const Quotes = () => {
               </div>
 
               <div className="form my-3">
-                <label for="Name"  >Name</label>
+                <label htmlFor="Name">Name</label>
                 <input
                   type="text"
                   className="form-control"
@@ -74,11 +85,11 @@ const Quotes = () => {
                 />
               </div>
               <div className="form my-3">
-                <label for="Email">Email</label>
+                <label htmlFor="email">Email</label>
                 <input
                   type="email"
                   className="form-control"
-                  id="mobileno"
+                  id="email"
                   name="Email"
                   value={userData.Email}
                   onChange={handleInputChange}
@@ -87,7 +98,7 @@ const Quotes = () => {
               </div>
 
               <div className="form my-3">
-                <label for="Email">Phone no</label>
+                <label htmlFor="phone">Phone no</label>
                 <input
                   type="text"
                   className="form-control"
@@ -99,8 +110,8 @@ const Quotes = () => {
                 />
               </div>
 
-              <div className="form  my-3">
-                <label for="Address" >Address</label>
+              <div className="form my-3">
+                <label htmlFor="Address">Address</label>
                 <textarea
                   rows={2}
                   className="form-control"
@@ -116,8 +127,6 @@ const Quotes = () => {
                 <button
                   className="my-2 px-4 mx-auto btn btn-dark"
                   type="submit"
-                  value="Send"
-                  onClick={handleSaveData}
                 >
                   Send
                 </button>

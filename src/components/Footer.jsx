@@ -22,8 +22,8 @@ const Footer = () => {
             <div class="footer-col">
               <h4>company</h4>
               <ul>
-                <li><a href="http://localhost:3001/about">about us</a></li>
-                <li><a href="http://localhost:3001/contact">Contact Us</a></li>
+                <li><a href="/about">about us</a></li>
+                <li><a href="/contact">Contact Us</a></li>
                 <li><a href="/privacy-policy">privacy policy</a></li>
                 <li><a href="/terms-condition">Term & Condition</a></li>
               </ul>
